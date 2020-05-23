@@ -1,0 +1,1541 @@
+Parsing source file samples/s1/main.go...
+Found imports:
+"net/http"
+     0  *ast.File {
+     1  .  Package: samples/s1/main.go:1:1
+     2  .  Name: *ast.Ident {
+     3  .  .  NamePos: samples/s1/main.go:1:9
+     4  .  .  Name: "main"
+     5  .  }
+     6  .  Decls: []ast.Decl (len = 2) {
+     7  .  .  0: *ast.GenDecl {
+     8  .  .  .  TokPos: samples/s1/main.go:3:1
+     9  .  .  .  Tok: import
+    10  .  .  .  Lparen: -
+    11  .  .  .  Specs: []ast.Spec (len = 1) {
+    12  .  .  .  .  0: *ast.ImportSpec {
+    13  .  .  .  .  .  Path: *ast.BasicLit {
+    14  .  .  .  .  .  .  ValuePos: samples/s1/main.go:3:8
+    15  .  .  .  .  .  .  Kind: STRING
+    16  .  .  .  .  .  .  Value: "\"net/http\""
+    17  .  .  .  .  .  }
+    18  .  .  .  .  .  EndPos: -
+    19  .  .  .  .  }
+    20  .  .  .  }
+    21  .  .  .  Rparen: -
+    22  .  .  }
+    23  .  .  1: *ast.FuncDecl {
+    24  .  .  .  Name: *ast.Ident {
+    25  .  .  .  .  NamePos: samples/s1/main.go:5:6
+    26  .  .  .  .  Name: "main"
+    27  .  .  .  .  Obj: *ast.Object {
+    28  .  .  .  .  .  Kind: func
+    29  .  .  .  .  .  Name: "main"
+    30  .  .  .  .  .  Decl: *(obj @ 23)
+    31  .  .  .  .  }
+    32  .  .  .  }
+    33  .  .  .  Type: *ast.FuncType {
+    34  .  .  .  .  Func: samples/s1/main.go:5:1
+    35  .  .  .  .  Params: *ast.FieldList {
+    36  .  .  .  .  .  Opening: samples/s1/main.go:5:10
+    37  .  .  .  .  .  Closing: samples/s1/main.go:5:11
+    38  .  .  .  .  }
+    39  .  .  .  }
+    40  .  .  .  Body: *ast.BlockStmt {
+    41  .  .  .  .  Lbrace: samples/s1/main.go:5:13
+    42  .  .  .  .  List: []ast.Stmt (len = 2) {
+    43  .  .  .  .  .  0: *ast.AssignStmt {
+    44  .  .  .  .  .  .  Lhs: []ast.Expr (len = 2) {
+    45  .  .  .  .  .  .  .  0: *ast.Ident {
+    46  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    47  .  .  .  .  .  .  .  .  Name: "res"
+    48  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    49  .  .  .  .  .  .  .  .  .  Kind: var
+    50  .  .  .  .  .  .  .  .  .  Name: "res"
+    51  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 43)
+    52  .  .  .  .  .  .  .  .  }
+    53  .  .  .  .  .  .  .  }
+    54  .  .  .  .  .  .  .  1: *ast.Ident {
+    55  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    56  .  .  .  .  .  .  .  .  Name: "_"
+    57  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    58  .  .  .  .  .  .  .  .  .  Kind: var
+    59  .  .  .  .  .  .  .  .  .  Name: "_"
+    60  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 43)
+    61  .  .  .  .  .  .  .  .  }
+    62  .  .  .  .  .  .  .  }
+    63  .  .  .  .  .  .  }
+    64  .  .  .  .  .  .  TokPos: samples/s1/main.go:6:9
+    65  .  .  .  .  .  .  Tok: :=
+    66  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    67  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    68  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    69  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    70  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    71  .  .  .  .  .  .  .  .  .  .  Name: "http"
+    72  .  .  .  .  .  .  .  .  .  }
+    73  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    74  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    75  .  .  .  .  .  .  .  .  .  .  Name: "Get"
+    76  .  .  .  .  .  .  .  .  .  }
+    77  .  .  .  .  .  .  .  .  }
+    78  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    79  .  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    80  .  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    81  .  .  .  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    82  .  .  .  .  .  .  .  .  .  .  Kind: STRING
+    83  .  .  .  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    84  .  .  .  .  .  .  .  .  .  }
+    85  .  .  .  .  .  .  .  .  }
+    86  .  .  .  .  .  .  .  .  Ellipsis: -
+    87  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    88  .  .  .  .  .  .  .  }
+    89  .  .  .  .  .  .  }
+    90  .  .  .  .  .  }
+    91  .  .  .  .  .  1: *ast.DeferStmt {
+    92  .  .  .  .  .  .  Defer: samples/s1/main.go:8:2
+    93  .  .  .  .  .  .  Call: *ast.CallExpr {
+    94  .  .  .  .  .  .  .  Fun: *ast.FuncLit {
+    95  .  .  .  .  .  .  .  .  Type: *ast.FuncType {
+    96  .  .  .  .  .  .  .  .  .  Func: samples/s1/main.go:8:8
+    97  .  .  .  .  .  .  .  .  .  Params: *ast.FieldList {
+    98  .  .  .  .  .  .  .  .  .  .  Opening: samples/s1/main.go:8:12
+    99  .  .  .  .  .  .  .  .  .  .  Closing: samples/s1/main.go:8:13
+   100  .  .  .  .  .  .  .  .  .  }
+   101  .  .  .  .  .  .  .  .  }
+   102  .  .  .  .  .  .  .  .  Body: *ast.BlockStmt {
+   103  .  .  .  .  .  .  .  .  .  Lbrace: samples/s1/main.go:8:15
+   104  .  .  .  .  .  .  .  .  .  List: []ast.Stmt (len = 1) {
+   105  .  .  .  .  .  .  .  .  .  .  0: *ast.AssignStmt {
+   106  .  .  .  .  .  .  .  .  .  .  .  Lhs: []ast.Expr (len = 1) {
+   107  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+   108  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:3
+   109  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+   110  .  .  .  .  .  .  .  .  .  .  .  .  }
+   111  .  .  .  .  .  .  .  .  .  .  .  }
+   112  .  .  .  .  .  .  .  .  .  .  .  TokPos: samples/s1/main.go:9:5
+   113  .  .  .  .  .  .  .  .  .  .  .  Tok: =
+   114  .  .  .  .  .  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+   115  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.CallExpr {
+   116  .  .  .  .  .  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+   117  .  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.SelectorExpr {
+   118  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+   119  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:7
+   120  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "res"
+   121  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 48)
+   122  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+   123  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+   124  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:11
+   125  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Body"
+   126  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+   127  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+   128  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+   129  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:16
+   130  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Close"
+   131  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+   132  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+   133  .  .  .  .  .  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:9:21
+   134  .  .  .  .  .  .  .  .  .  .  .  .  .  Ellipsis: -
+   135  .  .  .  .  .  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:9:22
+   136  .  .  .  .  .  .  .  .  .  .  .  .  }
+   137  .  .  .  .  .  .  .  .  .  .  .  }
+   138  .  .  .  .  .  .  .  .  .  .  }
+   139  .  .  .  .  .  .  .  .  .  }
+   140  .  .  .  .  .  .  .  .  .  Rbrace: samples/s1/main.go:10:2
+   141  .  .  .  .  .  .  .  .  }
+   142  .  .  .  .  .  .  .  }
+   143  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:10:3
+   144  .  .  .  .  .  .  .  Ellipsis: -
+   145  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:10:4
+   146  .  .  .  .  .  .  }
+   147  .  .  .  .  .  }
+   148  .  .  .  .  }
+   149  .  .  .  .  Rbrace: samples/s1/main.go:11:1
+   150  .  .  .  }
+   151  .  .  }
+   152  .  }
+   153  .  Scope: *ast.Scope {
+   154  .  .  Objects: map[string]*ast.Object (len = 1) {
+   155  .  .  .  "main": *(obj @ 27)
+   156  .  .  }
+   157  .  }
+   158  .  Imports: []*ast.ImportSpec (len = 1) {
+   159  .  .  0: *(obj @ 12)
+   160  .  }
+   161  .  Unresolved: []*ast.Ident (len = 1) {
+   162  .  .  0: *(obj @ 69)
+   163  .  }
+   164  }
+     0  *ast.Ident {
+     1  .  NamePos: samples/s1/main.go:1:9
+     2  .  Name: "main"
+     3  }
+     0  nil
+     0  *ast.GenDecl {
+     1  .  TokPos: samples/s1/main.go:3:1
+     2  .  Tok: import
+     3  .  Lparen: -
+     4  .  Specs: []ast.Spec (len = 1) {
+     5  .  .  0: *ast.ImportSpec {
+     6  .  .  .  Path: *ast.BasicLit {
+     7  .  .  .  .  ValuePos: samples/s1/main.go:3:8
+     8  .  .  .  .  Kind: STRING
+     9  .  .  .  .  Value: "\"net/http\""
+    10  .  .  .  }
+    11  .  .  .  EndPos: -
+    12  .  .  }
+    13  .  }
+    14  .  Rparen: -
+    15  }
+     0  *ast.ImportSpec {
+     1  .  Path: *ast.BasicLit {
+     2  .  .  ValuePos: samples/s1/main.go:3:8
+     3  .  .  Kind: STRING
+     4  .  .  Value: "\"net/http\""
+     5  .  }
+     6  .  EndPos: -
+     7  }
+     0  *ast.BasicLit {
+     1  .  ValuePos: samples/s1/main.go:3:8
+     2  .  Kind: STRING
+     3  .  Value: "\"net/http\""
+     4  }
+     0  nil
+     0  nil
+     0  nil
+     0  *ast.FuncDecl {
+     1  .  Name: *ast.Ident {
+     2  .  .  NamePos: samples/s1/main.go:5:6
+     3  .  .  Name: "main"
+     4  .  .  Obj: *ast.Object {
+     5  .  .  .  Kind: func
+     6  .  .  .  Name: "main"
+     7  .  .  .  Decl: *(obj @ 0)
+     8  .  .  }
+     9  .  }
+    10  .  Type: *ast.FuncType {
+    11  .  .  Func: samples/s1/main.go:5:1
+    12  .  .  Params: *ast.FieldList {
+    13  .  .  .  Opening: samples/s1/main.go:5:10
+    14  .  .  .  Closing: samples/s1/main.go:5:11
+    15  .  .  }
+    16  .  }
+    17  .  Body: *ast.BlockStmt {
+    18  .  .  Lbrace: samples/s1/main.go:5:13
+    19  .  .  List: []ast.Stmt (len = 2) {
+    20  .  .  .  0: *ast.AssignStmt {
+    21  .  .  .  .  Lhs: []ast.Expr (len = 2) {
+    22  .  .  .  .  .  0: *ast.Ident {
+    23  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    24  .  .  .  .  .  .  Name: "res"
+    25  .  .  .  .  .  .  Obj: *ast.Object {
+    26  .  .  .  .  .  .  .  Kind: var
+    27  .  .  .  .  .  .  .  Name: "res"
+    28  .  .  .  .  .  .  .  Decl: *(obj @ 20)
+    29  .  .  .  .  .  .  }
+    30  .  .  .  .  .  }
+    31  .  .  .  .  .  1: *ast.Ident {
+    32  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    33  .  .  .  .  .  .  Name: "_"
+    34  .  .  .  .  .  .  Obj: *ast.Object {
+    35  .  .  .  .  .  .  .  Kind: var
+    36  .  .  .  .  .  .  .  Name: "_"
+    37  .  .  .  .  .  .  .  Decl: *(obj @ 20)
+    38  .  .  .  .  .  .  }
+    39  .  .  .  .  .  }
+    40  .  .  .  .  }
+    41  .  .  .  .  TokPos: samples/s1/main.go:6:9
+    42  .  .  .  .  Tok: :=
+    43  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    44  .  .  .  .  .  0: *ast.CallExpr {
+    45  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    46  .  .  .  .  .  .  .  X: *ast.Ident {
+    47  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    48  .  .  .  .  .  .  .  .  Name: "http"
+    49  .  .  .  .  .  .  .  }
+    50  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    51  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    52  .  .  .  .  .  .  .  .  Name: "Get"
+    53  .  .  .  .  .  .  .  }
+    54  .  .  .  .  .  .  }
+    55  .  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    56  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    57  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    58  .  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    59  .  .  .  .  .  .  .  .  Kind: STRING
+    60  .  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    61  .  .  .  .  .  .  .  }
+    62  .  .  .  .  .  .  }
+    63  .  .  .  .  .  .  Ellipsis: -
+    64  .  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    65  .  .  .  .  .  }
+    66  .  .  .  .  }
+    67  .  .  .  }
+    68  .  .  .  1: *ast.DeferStmt {
+    69  .  .  .  .  Defer: samples/s1/main.go:8:2
+    70  .  .  .  .  Call: *ast.CallExpr {
+    71  .  .  .  .  .  Fun: *ast.FuncLit {
+    72  .  .  .  .  .  .  Type: *ast.FuncType {
+    73  .  .  .  .  .  .  .  Func: samples/s1/main.go:8:8
+    74  .  .  .  .  .  .  .  Params: *ast.FieldList {
+    75  .  .  .  .  .  .  .  .  Opening: samples/s1/main.go:8:12
+    76  .  .  .  .  .  .  .  .  Closing: samples/s1/main.go:8:13
+    77  .  .  .  .  .  .  .  }
+    78  .  .  .  .  .  .  }
+    79  .  .  .  .  .  .  Body: *ast.BlockStmt {
+    80  .  .  .  .  .  .  .  Lbrace: samples/s1/main.go:8:15
+    81  .  .  .  .  .  .  .  List: []ast.Stmt (len = 1) {
+    82  .  .  .  .  .  .  .  .  0: *ast.AssignStmt {
+    83  .  .  .  .  .  .  .  .  .  Lhs: []ast.Expr (len = 1) {
+    84  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    85  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:3
+    86  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    87  .  .  .  .  .  .  .  .  .  .  }
+    88  .  .  .  .  .  .  .  .  .  }
+    89  .  .  .  .  .  .  .  .  .  TokPos: samples/s1/main.go:9:5
+    90  .  .  .  .  .  .  .  .  .  Tok: =
+    91  .  .  .  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    92  .  .  .  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    93  .  .  .  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    94  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.SelectorExpr {
+    95  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    96  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:7
+    97  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    98  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 25)
+    99  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+   100  .  .  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+   101  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:11
+   102  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Body"
+   103  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+   104  .  .  .  .  .  .  .  .  .  .  .  .  }
+   105  .  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+   106  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:16
+   107  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Close"
+   108  .  .  .  .  .  .  .  .  .  .  .  .  }
+   109  .  .  .  .  .  .  .  .  .  .  .  }
+   110  .  .  .  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:9:21
+   111  .  .  .  .  .  .  .  .  .  .  .  Ellipsis: -
+   112  .  .  .  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:9:22
+   113  .  .  .  .  .  .  .  .  .  .  }
+   114  .  .  .  .  .  .  .  .  .  }
+   115  .  .  .  .  .  .  .  .  }
+   116  .  .  .  .  .  .  .  }
+   117  .  .  .  .  .  .  .  Rbrace: samples/s1/main.go:10:2
+   118  .  .  .  .  .  .  }
+   119  .  .  .  .  .  }
+   120  .  .  .  .  .  Lparen: samples/s1/main.go:10:3
+   121  .  .  .  .  .  Ellipsis: -
+   122  .  .  .  .  .  Rparen: samples/s1/main.go:10:4
+   123  .  .  .  .  }
+   124  .  .  .  }
+   125  .  .  }
+   126  .  .  Rbrace: samples/s1/main.go:11:1
+   127  .  }
+   128  }
+     0  *ast.Ident {
+     1  .  NamePos: samples/s1/main.go:5:6
+     2  .  Name: "main"
+     3  .  Obj: *ast.Object {
+     4  .  .  Kind: func
+     5  .  .  Name: "main"
+     6  .  .  Decl: *ast.FuncDecl {
+     7  .  .  .  Name: *(obj @ 0)
+     8  .  .  .  Type: *ast.FuncType {
+     9  .  .  .  .  Func: samples/s1/main.go:5:1
+    10  .  .  .  .  Params: *ast.FieldList {
+    11  .  .  .  .  .  Opening: samples/s1/main.go:5:10
+    12  .  .  .  .  .  Closing: samples/s1/main.go:5:11
+    13  .  .  .  .  }
+    14  .  .  .  }
+    15  .  .  .  Body: *ast.BlockStmt {
+    16  .  .  .  .  Lbrace: samples/s1/main.go:5:13
+    17  .  .  .  .  List: []ast.Stmt (len = 2) {
+    18  .  .  .  .  .  0: *ast.AssignStmt {
+    19  .  .  .  .  .  .  Lhs: []ast.Expr (len = 2) {
+    20  .  .  .  .  .  .  .  0: *ast.Ident {
+    21  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    22  .  .  .  .  .  .  .  .  Name: "res"
+    23  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    24  .  .  .  .  .  .  .  .  .  Kind: var
+    25  .  .  .  .  .  .  .  .  .  Name: "res"
+    26  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 18)
+    27  .  .  .  .  .  .  .  .  }
+    28  .  .  .  .  .  .  .  }
+    29  .  .  .  .  .  .  .  1: *ast.Ident {
+    30  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    31  .  .  .  .  .  .  .  .  Name: "_"
+    32  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    33  .  .  .  .  .  .  .  .  .  Kind: var
+    34  .  .  .  .  .  .  .  .  .  Name: "_"
+    35  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 18)
+    36  .  .  .  .  .  .  .  .  }
+    37  .  .  .  .  .  .  .  }
+    38  .  .  .  .  .  .  }
+    39  .  .  .  .  .  .  TokPos: samples/s1/main.go:6:9
+    40  .  .  .  .  .  .  Tok: :=
+    41  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    42  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    43  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    44  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    45  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    46  .  .  .  .  .  .  .  .  .  .  Name: "http"
+    47  .  .  .  .  .  .  .  .  .  }
+    48  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    49  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    50  .  .  .  .  .  .  .  .  .  .  Name: "Get"
+    51  .  .  .  .  .  .  .  .  .  }
+    52  .  .  .  .  .  .  .  .  }
+    53  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    54  .  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    55  .  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    56  .  .  .  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    57  .  .  .  .  .  .  .  .  .  .  Kind: STRING
+    58  .  .  .  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    59  .  .  .  .  .  .  .  .  .  }
+    60  .  .  .  .  .  .  .  .  }
+    61  .  .  .  .  .  .  .  .  Ellipsis: -
+    62  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    63  .  .  .  .  .  .  .  }
+    64  .  .  .  .  .  .  }
+    65  .  .  .  .  .  }
+    66  .  .  .  .  .  1: *ast.DeferStmt {
+    67  .  .  .  .  .  .  Defer: samples/s1/main.go:8:2
+    68  .  .  .  .  .  .  Call: *ast.CallExpr {
+    69  .  .  .  .  .  .  .  Fun: *ast.FuncLit {
+    70  .  .  .  .  .  .  .  .  Type: *ast.FuncType {
+    71  .  .  .  .  .  .  .  .  .  Func: samples/s1/main.go:8:8
+    72  .  .  .  .  .  .  .  .  .  Params: *ast.FieldList {
+    73  .  .  .  .  .  .  .  .  .  .  Opening: samples/s1/main.go:8:12
+    74  .  .  .  .  .  .  .  .  .  .  Closing: samples/s1/main.go:8:13
+    75  .  .  .  .  .  .  .  .  .  }
+    76  .  .  .  .  .  .  .  .  }
+    77  .  .  .  .  .  .  .  .  Body: *ast.BlockStmt {
+    78  .  .  .  .  .  .  .  .  .  Lbrace: samples/s1/main.go:8:15
+    79  .  .  .  .  .  .  .  .  .  List: []ast.Stmt (len = 1) {
+    80  .  .  .  .  .  .  .  .  .  .  0: *ast.AssignStmt {
+    81  .  .  .  .  .  .  .  .  .  .  .  Lhs: []ast.Expr (len = 1) {
+    82  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    83  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:3
+    84  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    85  .  .  .  .  .  .  .  .  .  .  .  .  }
+    86  .  .  .  .  .  .  .  .  .  .  .  }
+    87  .  .  .  .  .  .  .  .  .  .  .  TokPos: samples/s1/main.go:9:5
+    88  .  .  .  .  .  .  .  .  .  .  .  Tok: =
+    89  .  .  .  .  .  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    90  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    91  .  .  .  .  .  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    92  .  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.SelectorExpr {
+    93  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    94  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:7
+    95  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    96  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 23)
+    97  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    98  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    99  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:11
+   100  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Body"
+   101  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+   102  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+   103  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+   104  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:16
+   105  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Close"
+   106  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+   107  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+   108  .  .  .  .  .  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:9:21
+   109  .  .  .  .  .  .  .  .  .  .  .  .  .  Ellipsis: -
+   110  .  .  .  .  .  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:9:22
+   111  .  .  .  .  .  .  .  .  .  .  .  .  }
+   112  .  .  .  .  .  .  .  .  .  .  .  }
+   113  .  .  .  .  .  .  .  .  .  .  }
+   114  .  .  .  .  .  .  .  .  .  }
+   115  .  .  .  .  .  .  .  .  .  Rbrace: samples/s1/main.go:10:2
+   116  .  .  .  .  .  .  .  .  }
+   117  .  .  .  .  .  .  .  }
+   118  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:10:3
+   119  .  .  .  .  .  .  .  Ellipsis: -
+   120  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:10:4
+   121  .  .  .  .  .  .  }
+   122  .  .  .  .  .  }
+   123  .  .  .  .  }
+   124  .  .  .  .  Rbrace: samples/s1/main.go:11:1
+   125  .  .  .  }
+   126  .  .  }
+   127  .  }
+   128  }
+     0  nil
+     0  nil
+     0  *ast.FuncType {
+     1  .  Func: samples/s1/main.go:5:1
+     2  .  Params: *ast.FieldList {
+     3  .  .  Opening: samples/s1/main.go:5:10
+     4  .  .  Closing: samples/s1/main.go:5:11
+     5  .  }
+     6  }
+     0  *ast.FieldList {
+     1  .  Opening: samples/s1/main.go:5:10
+     2  .  Closing: samples/s1/main.go:5:11
+     3  }
+     0  nil
+     0  nil
+     0  *ast.BlockStmt {
+     1  .  Lbrace: samples/s1/main.go:5:13
+     2  .  List: []ast.Stmt (len = 2) {
+     3  .  .  0: *ast.AssignStmt {
+     4  .  .  .  Lhs: []ast.Expr (len = 2) {
+     5  .  .  .  .  0: *ast.Ident {
+     6  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+     7  .  .  .  .  .  Name: "res"
+     8  .  .  .  .  .  Obj: *ast.Object {
+     9  .  .  .  .  .  .  Kind: var
+    10  .  .  .  .  .  .  Name: "res"
+    11  .  .  .  .  .  .  Decl: *(obj @ 3)
+    12  .  .  .  .  .  }
+    13  .  .  .  .  }
+    14  .  .  .  .  1: *ast.Ident {
+    15  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    16  .  .  .  .  .  Name: "_"
+    17  .  .  .  .  .  Obj: *ast.Object {
+    18  .  .  .  .  .  .  Kind: var
+    19  .  .  .  .  .  .  Name: "_"
+    20  .  .  .  .  .  .  Decl: *(obj @ 3)
+    21  .  .  .  .  .  }
+    22  .  .  .  .  }
+    23  .  .  .  }
+    24  .  .  .  TokPos: samples/s1/main.go:6:9
+    25  .  .  .  Tok: :=
+    26  .  .  .  Rhs: []ast.Expr (len = 1) {
+    27  .  .  .  .  0: *ast.CallExpr {
+    28  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    29  .  .  .  .  .  .  X: *ast.Ident {
+    30  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    31  .  .  .  .  .  .  .  Name: "http"
+    32  .  .  .  .  .  .  }
+    33  .  .  .  .  .  .  Sel: *ast.Ident {
+    34  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    35  .  .  .  .  .  .  .  Name: "Get"
+    36  .  .  .  .  .  .  }
+    37  .  .  .  .  .  }
+    38  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    39  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    40  .  .  .  .  .  .  0: *ast.BasicLit {
+    41  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    42  .  .  .  .  .  .  .  Kind: STRING
+    43  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    44  .  .  .  .  .  .  }
+    45  .  .  .  .  .  }
+    46  .  .  .  .  .  Ellipsis: -
+    47  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    48  .  .  .  .  }
+    49  .  .  .  }
+    50  .  .  }
+    51  .  .  1: *ast.DeferStmt {
+    52  .  .  .  Defer: samples/s1/main.go:8:2
+    53  .  .  .  Call: *ast.CallExpr {
+    54  .  .  .  .  Fun: *ast.FuncLit {
+    55  .  .  .  .  .  Type: *ast.FuncType {
+    56  .  .  .  .  .  .  Func: samples/s1/main.go:8:8
+    57  .  .  .  .  .  .  Params: *ast.FieldList {
+    58  .  .  .  .  .  .  .  Opening: samples/s1/main.go:8:12
+    59  .  .  .  .  .  .  .  Closing: samples/s1/main.go:8:13
+    60  .  .  .  .  .  .  }
+    61  .  .  .  .  .  }
+    62  .  .  .  .  .  Body: *ast.BlockStmt {
+    63  .  .  .  .  .  .  Lbrace: samples/s1/main.go:8:15
+    64  .  .  .  .  .  .  List: []ast.Stmt (len = 1) {
+    65  .  .  .  .  .  .  .  0: *ast.AssignStmt {
+    66  .  .  .  .  .  .  .  .  Lhs: []ast.Expr (len = 1) {
+    67  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    68  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:3
+    69  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    70  .  .  .  .  .  .  .  .  .  }
+    71  .  .  .  .  .  .  .  .  }
+    72  .  .  .  .  .  .  .  .  TokPos: samples/s1/main.go:9:5
+    73  .  .  .  .  .  .  .  .  Tok: =
+    74  .  .  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    75  .  .  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    76  .  .  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    77  .  .  .  .  .  .  .  .  .  .  .  X: *ast.SelectorExpr {
+    78  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    79  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:7
+    80  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    81  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 8)
+    82  .  .  .  .  .  .  .  .  .  .  .  .  }
+    83  .  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    84  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:11
+    85  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Body"
+    86  .  .  .  .  .  .  .  .  .  .  .  .  }
+    87  .  .  .  .  .  .  .  .  .  .  .  }
+    88  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    89  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:16
+    90  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Close"
+    91  .  .  .  .  .  .  .  .  .  .  .  }
+    92  .  .  .  .  .  .  .  .  .  .  }
+    93  .  .  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:9:21
+    94  .  .  .  .  .  .  .  .  .  .  Ellipsis: -
+    95  .  .  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:9:22
+    96  .  .  .  .  .  .  .  .  .  }
+    97  .  .  .  .  .  .  .  .  }
+    98  .  .  .  .  .  .  .  }
+    99  .  .  .  .  .  .  }
+   100  .  .  .  .  .  .  Rbrace: samples/s1/main.go:10:2
+   101  .  .  .  .  .  }
+   102  .  .  .  .  }
+   103  .  .  .  .  Lparen: samples/s1/main.go:10:3
+   104  .  .  .  .  Ellipsis: -
+   105  .  .  .  .  Rparen: samples/s1/main.go:10:4
+   106  .  .  .  }
+   107  .  .  }
+   108  .  }
+   109  .  Rbrace: samples/s1/main.go:11:1
+   110  }
+     0  *ast.AssignStmt {
+     1  .  Lhs: []ast.Expr (len = 2) {
+     2  .  .  0: *ast.Ident {
+     3  .  .  .  NamePos: samples/s1/main.go:6:2
+     4  .  .  .  Name: "res"
+     5  .  .  .  Obj: *ast.Object {
+     6  .  .  .  .  Kind: var
+     7  .  .  .  .  Name: "res"
+     8  .  .  .  .  Decl: *(obj @ 0)
+     9  .  .  .  }
+    10  .  .  }
+    11  .  .  1: *ast.Ident {
+    12  .  .  .  NamePos: samples/s1/main.go:6:7
+    13  .  .  .  Name: "_"
+    14  .  .  .  Obj: *ast.Object {
+    15  .  .  .  .  Kind: var
+    16  .  .  .  .  Name: "_"
+    17  .  .  .  .  Decl: *(obj @ 0)
+    18  .  .  .  }
+    19  .  .  }
+    20  .  }
+    21  .  TokPos: samples/s1/main.go:6:9
+    22  .  Tok: :=
+    23  .  Rhs: []ast.Expr (len = 1) {
+    24  .  .  0: *ast.CallExpr {
+    25  .  .  .  Fun: *ast.SelectorExpr {
+    26  .  .  .  .  X: *ast.Ident {
+    27  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    28  .  .  .  .  .  Name: "http"
+    29  .  .  .  .  }
+    30  .  .  .  .  Sel: *ast.Ident {
+    31  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    32  .  .  .  .  .  Name: "Get"
+    33  .  .  .  .  }
+    34  .  .  .  }
+    35  .  .  .  Lparen: samples/s1/main.go:6:20
+    36  .  .  .  Args: []ast.Expr (len = 1) {
+    37  .  .  .  .  0: *ast.BasicLit {
+    38  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    39  .  .  .  .  .  Kind: STRING
+    40  .  .  .  .  .  Value: "\"https://www.google.com\""
+    41  .  .  .  .  }
+    42  .  .  .  }
+    43  .  .  .  Ellipsis: -
+    44  .  .  .  Rparen: samples/s1/main.go:6:45
+    45  .  .  }
+    46  .  }
+    47  }
+     0  *ast.Ident {
+     1  .  NamePos: samples/s1/main.go:6:2
+     2  .  Name: "res"
+     3  .  Obj: *ast.Object {
+     4  .  .  Kind: var
+     5  .  .  Name: "res"
+     6  .  .  Decl: *ast.AssignStmt {
+     7  .  .  .  Lhs: []ast.Expr (len = 2) {
+     8  .  .  .  .  0: *(obj @ 0)
+     9  .  .  .  .  1: *ast.Ident {
+    10  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    11  .  .  .  .  .  Name: "_"
+    12  .  .  .  .  .  Obj: *ast.Object {
+    13  .  .  .  .  .  .  Kind: var
+    14  .  .  .  .  .  .  Name: "_"
+    15  .  .  .  .  .  .  Decl: *(obj @ 6)
+    16  .  .  .  .  .  }
+    17  .  .  .  .  }
+    18  .  .  .  }
+    19  .  .  .  TokPos: samples/s1/main.go:6:9
+    20  .  .  .  Tok: :=
+    21  .  .  .  Rhs: []ast.Expr (len = 1) {
+    22  .  .  .  .  0: *ast.CallExpr {
+    23  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    24  .  .  .  .  .  .  X: *ast.Ident {
+    25  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    26  .  .  .  .  .  .  .  Name: "http"
+    27  .  .  .  .  .  .  }
+    28  .  .  .  .  .  .  Sel: *ast.Ident {
+    29  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    30  .  .  .  .  .  .  .  Name: "Get"
+    31  .  .  .  .  .  .  }
+    32  .  .  .  .  .  }
+    33  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    34  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    35  .  .  .  .  .  .  0: *ast.BasicLit {
+    36  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    37  .  .  .  .  .  .  .  Kind: STRING
+    38  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    39  .  .  .  .  .  .  }
+    40  .  .  .  .  .  }
+    41  .  .  .  .  .  Ellipsis: -
+    42  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    43  .  .  .  .  }
+    44  .  .  .  }
+    45  .  .  }
+    46  .  }
+    47  }
+     0  nil
+     0  nil
+     0  *ast.Ident {
+     1  .  NamePos: samples/s1/main.go:6:7
+     2  .  Name: "_"
+     3  .  Obj: *ast.Object {
+     4  .  .  Kind: var
+     5  .  .  Name: "_"
+     6  .  .  Decl: *ast.AssignStmt {
+     7  .  .  .  Lhs: []ast.Expr (len = 2) {
+     8  .  .  .  .  0: *ast.Ident {
+     9  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    10  .  .  .  .  .  Name: "res"
+    11  .  .  .  .  .  Obj: *ast.Object {
+    12  .  .  .  .  .  .  Kind: var
+    13  .  .  .  .  .  .  Name: "res"
+    14  .  .  .  .  .  .  Decl: *(obj @ 6)
+    15  .  .  .  .  .  }
+    16  .  .  .  .  }
+    17  .  .  .  .  1: *(obj @ 0)
+    18  .  .  .  }
+    19  .  .  .  TokPos: samples/s1/main.go:6:9
+    20  .  .  .  Tok: :=
+    21  .  .  .  Rhs: []ast.Expr (len = 1) {
+    22  .  .  .  .  0: *ast.CallExpr {
+    23  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    24  .  .  .  .  .  .  X: *ast.Ident {
+    25  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    26  .  .  .  .  .  .  .  Name: "http"
+    27  .  .  .  .  .  .  }
+    28  .  .  .  .  .  .  Sel: *ast.Ident {
+    29  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    30  .  .  .  .  .  .  .  Name: "Get"
+    31  .  .  .  .  .  .  }
+    32  .  .  .  .  .  }
+    33  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    34  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    35  .  .  .  .  .  .  0: *ast.BasicLit {
+    36  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    37  .  .  .  .  .  .  .  Kind: STRING
+    38  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    39  .  .  .  .  .  .  }
+    40  .  .  .  .  .  }
+    41  .  .  .  .  .  Ellipsis: -
+    42  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    43  .  .  .  .  }
+    44  .  .  .  }
+    45  .  .  }
+    46  .  }
+    47  }
+     0  nil
+     0  nil
+     0  *ast.CallExpr {
+     1  .  Fun: *ast.SelectorExpr {
+     2  .  .  X: *ast.Ident {
+     3  .  .  .  NamePos: samples/s1/main.go:6:12
+     4  .  .  .  Name: "http"
+     5  .  .  }
+     6  .  .  Sel: *ast.Ident {
+     7  .  .  .  NamePos: samples/s1/main.go:6:17
+     8  .  .  .  Name: "Get"
+     9  .  .  }
+    10  .  }
+    11  .  Lparen: samples/s1/main.go:6:20
+    12  .  Args: []ast.Expr (len = 1) {
+    13  .  .  0: *ast.BasicLit {
+    14  .  .  .  ValuePos: samples/s1/main.go:6:21
+    15  .  .  .  Kind: STRING
+    16  .  .  .  Value: "\"https://www.google.com\""
+    17  .  .  }
+    18  .  }
+    19  .  Ellipsis: -
+    20  .  Rparen: samples/s1/main.go:6:45
+    21  }
+     0  *ast.SelectorExpr {
+     1  .  X: *ast.Ident {
+     2  .  .  NamePos: samples/s1/main.go:6:12
+     3  .  .  Name: "http"
+     4  .  }
+     5  .  Sel: *ast.Ident {
+     6  .  .  NamePos: samples/s1/main.go:6:17
+     7  .  .  Name: "Get"
+     8  .  }
+     9  }
+     0  *ast.Ident {
+     1  .  NamePos: samples/s1/main.go:6:12
+     2  .  Name: "http"
+     3  }
+     0  nil
+     0  *ast.Ident {
+     1  .  NamePos: samples/s1/main.go:6:17
+     2  .  Name: "Get"
+     3  }
+     0  nil
+     0  nil
+     0  *ast.BasicLit {
+     1  .  ValuePos: samples/s1/main.go:6:21
+     2  .  Kind: STRING
+     3  .  Value: "\"https://www.google.com\""
+     4  }
+     0  nil
+     0  nil
+     0  nil
+     0  *ast.DeferStmt {
+     1  .  Defer: samples/s1/main.go:8:2
+     2  .  Call: *ast.CallExpr {
+     3  .  .  Fun: *ast.FuncLit {
+     4  .  .  .  Type: *ast.FuncType {
+     5  .  .  .  .  Func: samples/s1/main.go:8:8
+     6  .  .  .  .  Params: *ast.FieldList {
+     7  .  .  .  .  .  Opening: samples/s1/main.go:8:12
+     8  .  .  .  .  .  Closing: samples/s1/main.go:8:13
+     9  .  .  .  .  }
+    10  .  .  .  }
+    11  .  .  .  Body: *ast.BlockStmt {
+    12  .  .  .  .  Lbrace: samples/s1/main.go:8:15
+    13  .  .  .  .  List: []ast.Stmt (len = 1) {
+    14  .  .  .  .  .  0: *ast.AssignStmt {
+    15  .  .  .  .  .  .  Lhs: []ast.Expr (len = 1) {
+    16  .  .  .  .  .  .  .  0: *ast.Ident {
+    17  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:3
+    18  .  .  .  .  .  .  .  .  Name: "_"
+    19  .  .  .  .  .  .  .  }
+    20  .  .  .  .  .  .  }
+    21  .  .  .  .  .  .  TokPos: samples/s1/main.go:9:5
+    22  .  .  .  .  .  .  Tok: =
+    23  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    24  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    25  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    26  .  .  .  .  .  .  .  .  .  X: *ast.SelectorExpr {
+    27  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    28  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:7
+    29  .  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    30  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    31  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+    32  .  .  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    33  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *ast.AssignStmt {
+    34  .  .  .  .  .  .  .  .  .  .  .  .  .  Lhs: []ast.Expr (len = 2) {
+    35  .  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    36  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    37  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    38  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 30)
+    39  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    40  .  .  .  .  .  .  .  .  .  .  .  .  .  .  1: *ast.Ident {
+    41  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    42  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    43  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    44  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+    45  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    46  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 33)
+    47  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    48  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    49  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    50  .  .  .  .  .  .  .  .  .  .  .  .  .  TokPos: samples/s1/main.go:6:9
+    51  .  .  .  .  .  .  .  .  .  .  .  .  .  Tok: :=
+    52  .  .  .  .  .  .  .  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    53  .  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    54  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    55  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    56  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    57  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "http"
+    58  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    59  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    60  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    61  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Get"
+    62  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    63  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    64  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    65  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    66  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    67  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    68  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Kind: STRING
+    69  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    70  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    71  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    72  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Ellipsis: -
+    73  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    74  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    75  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    76  .  .  .  .  .  .  .  .  .  .  .  .  }
+    77  .  .  .  .  .  .  .  .  .  .  .  }
+    78  .  .  .  .  .  .  .  .  .  .  }
+    79  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    80  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:11
+    81  .  .  .  .  .  .  .  .  .  .  .  Name: "Body"
+    82  .  .  .  .  .  .  .  .  .  .  }
+    83  .  .  .  .  .  .  .  .  .  }
+    84  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    85  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:16
+    86  .  .  .  .  .  .  .  .  .  .  Name: "Close"
+    87  .  .  .  .  .  .  .  .  .  }
+    88  .  .  .  .  .  .  .  .  }
+    89  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:9:21
+    90  .  .  .  .  .  .  .  .  Ellipsis: -
+    91  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:9:22
+    92  .  .  .  .  .  .  .  }
+    93  .  .  .  .  .  .  }
+    94  .  .  .  .  .  }
+    95  .  .  .  .  }
+    96  .  .  .  .  Rbrace: samples/s1/main.go:10:2
+    97  .  .  .  }
+    98  .  .  }
+    99  .  .  Lparen: samples/s1/main.go:10:3
+   100  .  .  Ellipsis: -
+   101  .  .  Rparen: samples/s1/main.go:10:4
+   102  .  }
+   103  }
+     0  *ast.CallExpr {
+     1  .  Fun: *ast.FuncLit {
+     2  .  .  Type: *ast.FuncType {
+     3  .  .  .  Func: samples/s1/main.go:8:8
+     4  .  .  .  Params: *ast.FieldList {
+     5  .  .  .  .  Opening: samples/s1/main.go:8:12
+     6  .  .  .  .  Closing: samples/s1/main.go:8:13
+     7  .  .  .  }
+     8  .  .  }
+     9  .  .  Body: *ast.BlockStmt {
+    10  .  .  .  Lbrace: samples/s1/main.go:8:15
+    11  .  .  .  List: []ast.Stmt (len = 1) {
+    12  .  .  .  .  0: *ast.AssignStmt {
+    13  .  .  .  .  .  Lhs: []ast.Expr (len = 1) {
+    14  .  .  .  .  .  .  0: *ast.Ident {
+    15  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:3
+    16  .  .  .  .  .  .  .  Name: "_"
+    17  .  .  .  .  .  .  }
+    18  .  .  .  .  .  }
+    19  .  .  .  .  .  TokPos: samples/s1/main.go:9:5
+    20  .  .  .  .  .  Tok: =
+    21  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    22  .  .  .  .  .  .  0: *ast.CallExpr {
+    23  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    24  .  .  .  .  .  .  .  .  X: *ast.SelectorExpr {
+    25  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    26  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:7
+    27  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    28  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    29  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+    30  .  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    31  .  .  .  .  .  .  .  .  .  .  .  Decl: *ast.AssignStmt {
+    32  .  .  .  .  .  .  .  .  .  .  .  .  Lhs: []ast.Expr (len = 2) {
+    33  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    34  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    35  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    36  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 28)
+    37  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    38  .  .  .  .  .  .  .  .  .  .  .  .  .  1: *ast.Ident {
+    39  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    40  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    41  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    42  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+    43  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    44  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 31)
+    45  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    46  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    47  .  .  .  .  .  .  .  .  .  .  .  .  }
+    48  .  .  .  .  .  .  .  .  .  .  .  .  TokPos: samples/s1/main.go:6:9
+    49  .  .  .  .  .  .  .  .  .  .  .  .  Tok: :=
+    50  .  .  .  .  .  .  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    51  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    52  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    53  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    54  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    55  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "http"
+    56  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    57  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    58  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    59  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Get"
+    60  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    61  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    62  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    63  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    64  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    65  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    66  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Kind: STRING
+    67  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    68  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    69  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    70  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Ellipsis: -
+    71  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    72  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    73  .  .  .  .  .  .  .  .  .  .  .  .  }
+    74  .  .  .  .  .  .  .  .  .  .  .  }
+    75  .  .  .  .  .  .  .  .  .  .  }
+    76  .  .  .  .  .  .  .  .  .  }
+    77  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    78  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:11
+    79  .  .  .  .  .  .  .  .  .  .  Name: "Body"
+    80  .  .  .  .  .  .  .  .  .  }
+    81  .  .  .  .  .  .  .  .  }
+    82  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    83  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:16
+    84  .  .  .  .  .  .  .  .  .  Name: "Close"
+    85  .  .  .  .  .  .  .  .  }
+    86  .  .  .  .  .  .  .  }
+    87  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:9:21
+    88  .  .  .  .  .  .  .  Ellipsis: -
+    89  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:9:22
+    90  .  .  .  .  .  .  }
+    91  .  .  .  .  .  }
+    92  .  .  .  .  }
+    93  .  .  .  }
+    94  .  .  .  Rbrace: samples/s1/main.go:10:2
+    95  .  .  }
+    96  .  }
+    97  .  Lparen: samples/s1/main.go:10:3
+    98  .  Ellipsis: -
+    99  .  Rparen: samples/s1/main.go:10:4
+   100  }
+     0  *ast.FuncLit {
+     1  .  Type: *ast.FuncType {
+     2  .  .  Func: samples/s1/main.go:8:8
+     3  .  .  Params: *ast.FieldList {
+     4  .  .  .  Opening: samples/s1/main.go:8:12
+     5  .  .  .  Closing: samples/s1/main.go:8:13
+     6  .  .  }
+     7  .  }
+     8  .  Body: *ast.BlockStmt {
+     9  .  .  Lbrace: samples/s1/main.go:8:15
+    10  .  .  List: []ast.Stmt (len = 1) {
+    11  .  .  .  0: *ast.AssignStmt {
+    12  .  .  .  .  Lhs: []ast.Expr (len = 1) {
+    13  .  .  .  .  .  0: *ast.Ident {
+    14  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:3
+    15  .  .  .  .  .  .  Name: "_"
+    16  .  .  .  .  .  }
+    17  .  .  .  .  }
+    18  .  .  .  .  TokPos: samples/s1/main.go:9:5
+    19  .  .  .  .  Tok: =
+    20  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    21  .  .  .  .  .  0: *ast.CallExpr {
+    22  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    23  .  .  .  .  .  .  .  X: *ast.SelectorExpr {
+    24  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    25  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:7
+    26  .  .  .  .  .  .  .  .  .  Name: "res"
+    27  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    28  .  .  .  .  .  .  .  .  .  .  Kind: var
+    29  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    30  .  .  .  .  .  .  .  .  .  .  Decl: *ast.AssignStmt {
+    31  .  .  .  .  .  .  .  .  .  .  .  Lhs: []ast.Expr (len = 2) {
+    32  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    33  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    34  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    35  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 27)
+    36  .  .  .  .  .  .  .  .  .  .  .  .  }
+    37  .  .  .  .  .  .  .  .  .  .  .  .  1: *ast.Ident {
+    38  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    39  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    40  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    41  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+    42  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    43  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 30)
+    44  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    45  .  .  .  .  .  .  .  .  .  .  .  .  }
+    46  .  .  .  .  .  .  .  .  .  .  .  }
+    47  .  .  .  .  .  .  .  .  .  .  .  TokPos: samples/s1/main.go:6:9
+    48  .  .  .  .  .  .  .  .  .  .  .  Tok: :=
+    49  .  .  .  .  .  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    50  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    51  .  .  .  .  .  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    52  .  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    53  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    54  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "http"
+    55  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    56  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    57  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    58  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Get"
+    59  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    60  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    61  .  .  .  .  .  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    62  .  .  .  .  .  .  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    63  .  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    64  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    65  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Kind: STRING
+    66  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    67  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    68  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    69  .  .  .  .  .  .  .  .  .  .  .  .  .  Ellipsis: -
+    70  .  .  .  .  .  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    71  .  .  .  .  .  .  .  .  .  .  .  .  }
+    72  .  .  .  .  .  .  .  .  .  .  .  }
+    73  .  .  .  .  .  .  .  .  .  .  }
+    74  .  .  .  .  .  .  .  .  .  }
+    75  .  .  .  .  .  .  .  .  }
+    76  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    77  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:11
+    78  .  .  .  .  .  .  .  .  .  Name: "Body"
+    79  .  .  .  .  .  .  .  .  }
+    80  .  .  .  .  .  .  .  }
+    81  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    82  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:16
+    83  .  .  .  .  .  .  .  .  Name: "Close"
+    84  .  .  .  .  .  .  .  }
+    85  .  .  .  .  .  .  }
+    86  .  .  .  .  .  .  Lparen: samples/s1/main.go:9:21
+    87  .  .  .  .  .  .  Ellipsis: -
+    88  .  .  .  .  .  .  Rparen: samples/s1/main.go:9:22
+    89  .  .  .  .  .  }
+    90  .  .  .  .  }
+    91  .  .  .  }
+    92  .  .  }
+    93  .  .  Rbrace: samples/s1/main.go:10:2
+    94  .  }
+    95  }
+     0  *ast.FuncType {
+     1  .  Func: samples/s1/main.go:8:8
+     2  .  Params: *ast.FieldList {
+     3  .  .  Opening: samples/s1/main.go:8:12
+     4  .  .  Closing: samples/s1/main.go:8:13
+     5  .  }
+     6  }
+     0  *ast.FieldList {
+     1  .  Opening: samples/s1/main.go:8:12
+     2  .  Closing: samples/s1/main.go:8:13
+     3  }
+     0  nil
+     0  nil
+     0  *ast.BlockStmt {
+     1  .  Lbrace: samples/s1/main.go:8:15
+     2  .  List: []ast.Stmt (len = 1) {
+     3  .  .  0: *ast.AssignStmt {
+     4  .  .  .  Lhs: []ast.Expr (len = 1) {
+     5  .  .  .  .  0: *ast.Ident {
+     6  .  .  .  .  .  NamePos: samples/s1/main.go:9:3
+     7  .  .  .  .  .  Name: "_"
+     8  .  .  .  .  }
+     9  .  .  .  }
+    10  .  .  .  TokPos: samples/s1/main.go:9:5
+    11  .  .  .  Tok: =
+    12  .  .  .  Rhs: []ast.Expr (len = 1) {
+    13  .  .  .  .  0: *ast.CallExpr {
+    14  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    15  .  .  .  .  .  .  X: *ast.SelectorExpr {
+    16  .  .  .  .  .  .  .  X: *ast.Ident {
+    17  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:7
+    18  .  .  .  .  .  .  .  .  Name: "res"
+    19  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    20  .  .  .  .  .  .  .  .  .  Kind: var
+    21  .  .  .  .  .  .  .  .  .  Name: "res"
+    22  .  .  .  .  .  .  .  .  .  Decl: *ast.AssignStmt {
+    23  .  .  .  .  .  .  .  .  .  .  Lhs: []ast.Expr (len = 2) {
+    24  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    25  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    26  .  .  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    27  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 19)
+    28  .  .  .  .  .  .  .  .  .  .  .  }
+    29  .  .  .  .  .  .  .  .  .  .  .  1: *ast.Ident {
+    30  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    31  .  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    32  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    33  .  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+    34  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    35  .  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 22)
+    36  .  .  .  .  .  .  .  .  .  .  .  .  }
+    37  .  .  .  .  .  .  .  .  .  .  .  }
+    38  .  .  .  .  .  .  .  .  .  .  }
+    39  .  .  .  .  .  .  .  .  .  .  TokPos: samples/s1/main.go:6:9
+    40  .  .  .  .  .  .  .  .  .  .  Tok: :=
+    41  .  .  .  .  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    42  .  .  .  .  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    43  .  .  .  .  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    44  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    45  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    46  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "http"
+    47  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    48  .  .  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    49  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    50  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Get"
+    51  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    52  .  .  .  .  .  .  .  .  .  .  .  .  }
+    53  .  .  .  .  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    54  .  .  .  .  .  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    55  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    56  .  .  .  .  .  .  .  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    57  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Kind: STRING
+    58  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    59  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+    60  .  .  .  .  .  .  .  .  .  .  .  .  }
+    61  .  .  .  .  .  .  .  .  .  .  .  .  Ellipsis: -
+    62  .  .  .  .  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    63  .  .  .  .  .  .  .  .  .  .  .  }
+    64  .  .  .  .  .  .  .  .  .  .  }
+    65  .  .  .  .  .  .  .  .  .  }
+    66  .  .  .  .  .  .  .  .  }
+    67  .  .  .  .  .  .  .  }
+    68  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    69  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:11
+    70  .  .  .  .  .  .  .  .  Name: "Body"
+    71  .  .  .  .  .  .  .  }
+    72  .  .  .  .  .  .  }
+    73  .  .  .  .  .  .  Sel: *ast.Ident {
+    74  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:16
+    75  .  .  .  .  .  .  .  Name: "Close"
+    76  .  .  .  .  .  .  }
+    77  .  .  .  .  .  }
+    78  .  .  .  .  .  Lparen: samples/s1/main.go:9:21
+    79  .  .  .  .  .  Ellipsis: -
+    80  .  .  .  .  .  Rparen: samples/s1/main.go:9:22
+    81  .  .  .  .  }
+    82  .  .  .  }
+    83  .  .  }
+    84  .  }
+    85  .  Rbrace: samples/s1/main.go:10:2
+    86  }
+     0  *ast.AssignStmt {
+     1  .  Lhs: []ast.Expr (len = 1) {
+     2  .  .  0: *ast.Ident {
+     3  .  .  .  NamePos: samples/s1/main.go:9:3
+     4  .  .  .  Name: "_"
+     5  .  .  }
+     6  .  }
+     7  .  TokPos: samples/s1/main.go:9:5
+     8  .  Tok: =
+     9  .  Rhs: []ast.Expr (len = 1) {
+    10  .  .  0: *ast.CallExpr {
+    11  .  .  .  Fun: *ast.SelectorExpr {
+    12  .  .  .  .  X: *ast.SelectorExpr {
+    13  .  .  .  .  .  X: *ast.Ident {
+    14  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:7
+    15  .  .  .  .  .  .  Name: "res"
+    16  .  .  .  .  .  .  Obj: *ast.Object {
+    17  .  .  .  .  .  .  .  Kind: var
+    18  .  .  .  .  .  .  .  Name: "res"
+    19  .  .  .  .  .  .  .  Decl: *ast.AssignStmt {
+    20  .  .  .  .  .  .  .  .  Lhs: []ast.Expr (len = 2) {
+    21  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+    22  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    23  .  .  .  .  .  .  .  .  .  .  Name: "res"
+    24  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 16)
+    25  .  .  .  .  .  .  .  .  .  }
+    26  .  .  .  .  .  .  .  .  .  1: *ast.Ident {
+    27  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    28  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    29  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    30  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+    31  .  .  .  .  .  .  .  .  .  .  .  Name: "_"
+    32  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 19)
+    33  .  .  .  .  .  .  .  .  .  .  }
+    34  .  .  .  .  .  .  .  .  .  }
+    35  .  .  .  .  .  .  .  .  }
+    36  .  .  .  .  .  .  .  .  TokPos: samples/s1/main.go:6:9
+    37  .  .  .  .  .  .  .  .  Tok: :=
+    38  .  .  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    39  .  .  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    40  .  .  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    41  .  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    42  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    43  .  .  .  .  .  .  .  .  .  .  .  .  Name: "http"
+    44  .  .  .  .  .  .  .  .  .  .  .  }
+    45  .  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    46  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    47  .  .  .  .  .  .  .  .  .  .  .  .  Name: "Get"
+    48  .  .  .  .  .  .  .  .  .  .  .  }
+    49  .  .  .  .  .  .  .  .  .  .  }
+    50  .  .  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    51  .  .  .  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    52  .  .  .  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    53  .  .  .  .  .  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    54  .  .  .  .  .  .  .  .  .  .  .  .  Kind: STRING
+    55  .  .  .  .  .  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    56  .  .  .  .  .  .  .  .  .  .  .  }
+    57  .  .  .  .  .  .  .  .  .  .  }
+    58  .  .  .  .  .  .  .  .  .  .  Ellipsis: -
+    59  .  .  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    60  .  .  .  .  .  .  .  .  .  }
+    61  .  .  .  .  .  .  .  .  }
+    62  .  .  .  .  .  .  .  }
+    63  .  .  .  .  .  .  }
+    64  .  .  .  .  .  }
+    65  .  .  .  .  .  Sel: *ast.Ident {
+    66  .  .  .  .  .  .  NamePos: samples/s1/main.go:9:11
+    67  .  .  .  .  .  .  Name: "Body"
+    68  .  .  .  .  .  }
+    69  .  .  .  .  }
+    70  .  .  .  .  Sel: *ast.Ident {
+    71  .  .  .  .  .  NamePos: samples/s1/main.go:9:16
+    72  .  .  .  .  .  Name: "Close"
+    73  .  .  .  .  }
+    74  .  .  .  }
+    75  .  .  .  Lparen: samples/s1/main.go:9:21
+    76  .  .  .  Ellipsis: -
+    77  .  .  .  Rparen: samples/s1/main.go:9:22
+    78  .  .  }
+    79  .  }
+    80  }
+     0  *ast.Ident {
+     1  .  NamePos: samples/s1/main.go:9:3
+     2  .  Name: "_"
+     3  }
+     0  nil
+     0  *ast.CallExpr {
+     1  .  Fun: *ast.SelectorExpr {
+     2  .  .  X: *ast.SelectorExpr {
+     3  .  .  .  X: *ast.Ident {
+     4  .  .  .  .  NamePos: samples/s1/main.go:9:7
+     5  .  .  .  .  Name: "res"
+     6  .  .  .  .  Obj: *ast.Object {
+     7  .  .  .  .  .  Kind: var
+     8  .  .  .  .  .  Name: "res"
+     9  .  .  .  .  .  Decl: *ast.AssignStmt {
+    10  .  .  .  .  .  .  Lhs: []ast.Expr (len = 2) {
+    11  .  .  .  .  .  .  .  0: *ast.Ident {
+    12  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    13  .  .  .  .  .  .  .  .  Name: "res"
+    14  .  .  .  .  .  .  .  .  Obj: *(obj @ 6)
+    15  .  .  .  .  .  .  .  }
+    16  .  .  .  .  .  .  .  1: *ast.Ident {
+    17  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    18  .  .  .  .  .  .  .  .  Name: "_"
+    19  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+    20  .  .  .  .  .  .  .  .  .  Kind: var
+    21  .  .  .  .  .  .  .  .  .  Name: "_"
+    22  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 9)
+    23  .  .  .  .  .  .  .  .  }
+    24  .  .  .  .  .  .  .  }
+    25  .  .  .  .  .  .  }
+    26  .  .  .  .  .  .  TokPos: samples/s1/main.go:6:9
+    27  .  .  .  .  .  .  Tok: :=
+    28  .  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    29  .  .  .  .  .  .  .  0: *ast.CallExpr {
+    30  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    31  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    32  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    33  .  .  .  .  .  .  .  .  .  .  Name: "http"
+    34  .  .  .  .  .  .  .  .  .  }
+    35  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    36  .  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    37  .  .  .  .  .  .  .  .  .  .  Name: "Get"
+    38  .  .  .  .  .  .  .  .  .  }
+    39  .  .  .  .  .  .  .  .  }
+    40  .  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    41  .  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    42  .  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    43  .  .  .  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    44  .  .  .  .  .  .  .  .  .  .  Kind: STRING
+    45  .  .  .  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    46  .  .  .  .  .  .  .  .  .  }
+    47  .  .  .  .  .  .  .  .  }
+    48  .  .  .  .  .  .  .  .  Ellipsis: -
+    49  .  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    50  .  .  .  .  .  .  .  }
+    51  .  .  .  .  .  .  }
+    52  .  .  .  .  .  }
+    53  .  .  .  .  }
+    54  .  .  .  }
+    55  .  .  .  Sel: *ast.Ident {
+    56  .  .  .  .  NamePos: samples/s1/main.go:9:11
+    57  .  .  .  .  Name: "Body"
+    58  .  .  .  }
+    59  .  .  }
+    60  .  .  Sel: *ast.Ident {
+    61  .  .  .  NamePos: samples/s1/main.go:9:16
+    62  .  .  .  Name: "Close"
+    63  .  .  }
+    64  .  }
+    65  .  Lparen: samples/s1/main.go:9:21
+    66  .  Ellipsis: -
+    67  .  Rparen: samples/s1/main.go:9:22
+    68  }
+     0  *ast.SelectorExpr {
+     1  .  X: *ast.SelectorExpr {
+     2  .  .  X: *ast.Ident {
+     3  .  .  .  NamePos: samples/s1/main.go:9:7
+     4  .  .  .  Name: "res"
+     5  .  .  .  Obj: *ast.Object {
+     6  .  .  .  .  Kind: var
+     7  .  .  .  .  Name: "res"
+     8  .  .  .  .  Decl: *ast.AssignStmt {
+     9  .  .  .  .  .  Lhs: []ast.Expr (len = 2) {
+    10  .  .  .  .  .  .  0: *ast.Ident {
+    11  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    12  .  .  .  .  .  .  .  Name: "res"
+    13  .  .  .  .  .  .  .  Obj: *(obj @ 5)
+    14  .  .  .  .  .  .  }
+    15  .  .  .  .  .  .  1: *ast.Ident {
+    16  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    17  .  .  .  .  .  .  .  Name: "_"
+    18  .  .  .  .  .  .  .  Obj: *ast.Object {
+    19  .  .  .  .  .  .  .  .  Kind: var
+    20  .  .  .  .  .  .  .  .  Name: "_"
+    21  .  .  .  .  .  .  .  .  Decl: *(obj @ 8)
+    22  .  .  .  .  .  .  .  }
+    23  .  .  .  .  .  .  }
+    24  .  .  .  .  .  }
+    25  .  .  .  .  .  TokPos: samples/s1/main.go:6:9
+    26  .  .  .  .  .  Tok: :=
+    27  .  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    28  .  .  .  .  .  .  0: *ast.CallExpr {
+    29  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    30  .  .  .  .  .  .  .  .  X: *ast.Ident {
+    31  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    32  .  .  .  .  .  .  .  .  .  Name: "http"
+    33  .  .  .  .  .  .  .  .  }
+    34  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    35  .  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    36  .  .  .  .  .  .  .  .  .  Name: "Get"
+    37  .  .  .  .  .  .  .  .  }
+    38  .  .  .  .  .  .  .  }
+    39  .  .  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    40  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    41  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    42  .  .  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    43  .  .  .  .  .  .  .  .  .  Kind: STRING
+    44  .  .  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    45  .  .  .  .  .  .  .  .  }
+    46  .  .  .  .  .  .  .  }
+    47  .  .  .  .  .  .  .  Ellipsis: -
+    48  .  .  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    49  .  .  .  .  .  .  }
+    50  .  .  .  .  .  }
+    51  .  .  .  .  }
+    52  .  .  .  }
+    53  .  .  }
+    54  .  .  Sel: *ast.Ident {
+    55  .  .  .  NamePos: samples/s1/main.go:9:11
+    56  .  .  .  Name: "Body"
+    57  .  .  }
+    58  .  }
+    59  .  Sel: *ast.Ident {
+    60  .  .  NamePos: samples/s1/main.go:9:16
+    61  .  .  Name: "Close"
+    62  .  }
+    63  }
+     0  *ast.SelectorExpr {
+     1  .  X: *ast.Ident {
+     2  .  .  NamePos: samples/s1/main.go:9:7
+     3  .  .  Name: "res"
+     4  .  .  Obj: *ast.Object {
+     5  .  .  .  Kind: var
+     6  .  .  .  Name: "res"
+     7  .  .  .  Decl: *ast.AssignStmt {
+     8  .  .  .  .  Lhs: []ast.Expr (len = 2) {
+     9  .  .  .  .  .  0: *ast.Ident {
+    10  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    11  .  .  .  .  .  .  Name: "res"
+    12  .  .  .  .  .  .  Obj: *(obj @ 4)
+    13  .  .  .  .  .  }
+    14  .  .  .  .  .  1: *ast.Ident {
+    15  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    16  .  .  .  .  .  .  Name: "_"
+    17  .  .  .  .  .  .  Obj: *ast.Object {
+    18  .  .  .  .  .  .  .  Kind: var
+    19  .  .  .  .  .  .  .  Name: "_"
+    20  .  .  .  .  .  .  .  Decl: *(obj @ 7)
+    21  .  .  .  .  .  .  }
+    22  .  .  .  .  .  }
+    23  .  .  .  .  }
+    24  .  .  .  .  TokPos: samples/s1/main.go:6:9
+    25  .  .  .  .  Tok: :=
+    26  .  .  .  .  Rhs: []ast.Expr (len = 1) {
+    27  .  .  .  .  .  0: *ast.CallExpr {
+    28  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    29  .  .  .  .  .  .  .  X: *ast.Ident {
+    30  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    31  .  .  .  .  .  .  .  .  Name: "http"
+    32  .  .  .  .  .  .  .  }
+    33  .  .  .  .  .  .  .  Sel: *ast.Ident {
+    34  .  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    35  .  .  .  .  .  .  .  .  Name: "Get"
+    36  .  .  .  .  .  .  .  }
+    37  .  .  .  .  .  .  }
+    38  .  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    39  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    40  .  .  .  .  .  .  .  0: *ast.BasicLit {
+    41  .  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    42  .  .  .  .  .  .  .  .  Kind: STRING
+    43  .  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    44  .  .  .  .  .  .  .  }
+    45  .  .  .  .  .  .  }
+    46  .  .  .  .  .  .  Ellipsis: -
+    47  .  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    48  .  .  .  .  .  }
+    49  .  .  .  .  }
+    50  .  .  .  }
+    51  .  .  }
+    52  .  }
+    53  .  Sel: *ast.Ident {
+    54  .  .  NamePos: samples/s1/main.go:9:11
+    55  .  .  Name: "Body"
+    56  .  }
+    57  }
+     0  *ast.Ident {
+     1  .  NamePos: samples/s1/main.go:9:7
+     2  .  Name: "res"
+     3  .  Obj: *ast.Object {
+     4  .  .  Kind: var
+     5  .  .  Name: "res"
+     6  .  .  Decl: *ast.AssignStmt {
+     7  .  .  .  Lhs: []ast.Expr (len = 2) {
+     8  .  .  .  .  0: *ast.Ident {
+     9  .  .  .  .  .  NamePos: samples/s1/main.go:6:2
+    10  .  .  .  .  .  Name: "res"
+    11  .  .  .  .  .  Obj: *(obj @ 3)
+    12  .  .  .  .  }
+    13  .  .  .  .  1: *ast.Ident {
+    14  .  .  .  .  .  NamePos: samples/s1/main.go:6:7
+    15  .  .  .  .  .  Name: "_"
+    16  .  .  .  .  .  Obj: *ast.Object {
+    17  .  .  .  .  .  .  Kind: var
+    18  .  .  .  .  .  .  Name: "_"
+    19  .  .  .  .  .  .  Decl: *(obj @ 6)
+    20  .  .  .  .  .  }
+    21  .  .  .  .  }
+    22  .  .  .  }
+    23  .  .  .  TokPos: samples/s1/main.go:6:9
+    24  .  .  .  Tok: :=
+    25  .  .  .  Rhs: []ast.Expr (len = 1) {
+    26  .  .  .  .  0: *ast.CallExpr {
+    27  .  .  .  .  .  Fun: *ast.SelectorExpr {
+    28  .  .  .  .  .  .  X: *ast.Ident {
+    29  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:12
+    30  .  .  .  .  .  .  .  Name: "http"
+    31  .  .  .  .  .  .  }
+    32  .  .  .  .  .  .  Sel: *ast.Ident {
+    33  .  .  .  .  .  .  .  NamePos: samples/s1/main.go:6:17
+    34  .  .  .  .  .  .  .  Name: "Get"
+    35  .  .  .  .  .  .  }
+    36  .  .  .  .  .  }
+    37  .  .  .  .  .  Lparen: samples/s1/main.go:6:20
+    38  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+    39  .  .  .  .  .  .  0: *ast.BasicLit {
+    40  .  .  .  .  .  .  .  ValuePos: samples/s1/main.go:6:21
+    41  .  .  .  .  .  .  .  Kind: STRING
+    42  .  .  .  .  .  .  .  Value: "\"https://www.google.com\""
+    43  .  .  .  .  .  .  }
+    44  .  .  .  .  .  }
+    45  .  .  .  .  .  Ellipsis: -
+    46  .  .  .  .  .  Rparen: samples/s1/main.go:6:45
+    47  .  .  .  .  }
+    48  .  .  .  }
+    49  .  .  }
+    50  .  }
+    51  }
+     0  nil
+     0  nil
+     0  *ast.Ident {
+     1  .  NamePos: samples/s1/main.go:9:11
+     2  .  Name: "Body"
+     3  }
+     0  nil
+     0  nil
+     0  *ast.Ident {
+     1  .  NamePos: samples/s1/main.go:9:16
+     2  .  Name: "Close"
+     3  }
+     0  nil
+     0  nil
+     0  nil
+     0  nil
+     0  nil
+     0  nil
+     0  nil
+     0  nil
+     0  nil
+     0  nil
+     0  nil

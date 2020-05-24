@@ -126,9 +126,8 @@ func (v *Visitor) handleMultiAssignment(lhs []ast.Expr, rhs []ast.Expr) {
 			continue
 		}
 
-		needsClosing, retName := v.callReturnsCloser(call)
-		if id.Name == "_" && needsClosing {
-			v.pass.Reportf(call.Pos(), "%s should be closed", retName)
+		if id.Name == "_" {
+			v.handleCall(call)
 		}
 	}
 }

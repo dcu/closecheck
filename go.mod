@@ -1,4 +1,4 @@
-module github.com/dcu/check-close
+module github.com/dcu/closecheck
 
 go 1.14
 

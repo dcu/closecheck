@@ -10,13 +10,12 @@ import (
 )
 
 var (
-	// Analyzer defines the analyzer for check-close
+	// Analyzer defines the analyzer for closecheck
 	Analyzer = &analysis.Analyzer{
-		Name:     "checkclose",
-		Doc:      "check for any closable return value",
+		Name:     "closecheck",
+		Doc:      "check that any io.Closer in return a value is closed",
 		Run:      run,
 		Requires: []*analysis.Analyzer{inspect.Analyzer},
-		//FactTypes: []analysis.Fact{new(closer)},
 	}
 
 	closerType *types.Interface

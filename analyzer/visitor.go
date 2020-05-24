@@ -1,6 +1,7 @@
 package analyzer
 
 import (
+	"fmt"
 	"go/ast"
 	"go/types"
 
@@ -12,37 +13,81 @@ type Visitor struct {
 	pass *analysis.Pass
 }
 
-// Do performs the visits to the code nodes
-func (v *Visitor) Do(node ast.Node) bool {
-	switch x := node.(type) {
-	case *ast.CallExpr:
-		//_ = ast.Print(fset, x.Fun)
-
-		hasCloser(v.pass, closerType, x)
-
-		selexpr, ok := x.Fun.(*ast.SelectorExpr)
-		if !ok {
+func (v *Visitor) callReturnsCloser(call *ast.CallExpr) bool {
+	for _, isCloser := range v.returnsThatAreClosers(call) {
+		if isCloser {
 			return true
 		}
+	}
 
-		//ident, ok := selexpr.X.(*ast.Ident)
-		//if !ok {
-		//return true
-		//}
+	return false
+}
 
-		//pos := fset.Position(selexpr.Sel.Pos())
+func (v *Visitor) returnsThatAreClosers(call *ast.CallExpr) []bool {
+	switch t := v.pass.TypesInfo.Types[call].Type.(type) {
+	case *types.Named:
+		println(t.String(), isCloserType(closerType, t))
+		return []bool{isCloserType(closerType, t)}
+	case *types.Pointer:
+		println(t.String(), isCloserType(closerType, t))
+		return []bool{isCloserType(closerType, t)}
+	case *types.Tuple:
+		s := make([]bool, t.Len())
 
-		fn, ok := v.pass.TypesInfo.ObjectOf(selexpr.Sel).(*types.Func)
-
-		if ok {
-			println("<<<<<", fn.String())
+		for i := 0; i < t.Len(); i++ {
+			switch et := t.At(i).Type().(type) {
+			case *types.Named:
+				s[i] = isCloserType(closerType, et)
+			case *types.Pointer:
+				s[i] = isCloserType(closerType, et)
+			default:
+				s[i] = false
+			}
 		}
-	case *ast.Ident:
-		//fn := pkg.TypesInfo.ObjectOf(x) //.(*types.Func)
 
-		//if fn != nil {
-		//println(">>>>>", fn.String())
-		//}
+		fmt.Printf("tuple: %#v\n", s)
+
+		return s
+	default:
+		println(t.String(), "was not handled")
+	}
+
+	return []bool{false}
+}
+
+func (v *Visitor) handleAssignment(lhs []ast.Expr, rhs ast.Expr) {
+	switch n := rhs.(type) {
+	case *ast.CallExpr:
+		isCloserAtPos := v.returnsThatAreClosers(n)
+
+		for i := 0; i < len(lhs); i++ {
+			if id, ok := lhs[i].(*ast.Ident); ok {
+				if id.Name == "_" && isCloserAtPos[i] {
+					fmt.Println("this should be marked as error because the closer is asigned to _")
+				}
+			}
+		}
+	}
+}
+
+func (v *Visitor) handleMultiAssignment(lhs []ast.Expr, rhs []ast.Expr) {
+}
+
+// Do performs the visits to the code nodes
+func (v *Visitor) Do(node ast.Node) bool {
+	switch stmt := node.(type) {
+	case *ast.ExprStmt:
+		if call, ok := stmt.X.(*ast.CallExpr); ok {
+			if v.callReturnsCloser(call) {
+				fmt.Println("this should fail because it's a statement with not handled closer")
+			}
+		}
+	case *ast.AssignStmt:
+		if len(stmt.Rhs) == 1 {
+			v.handleAssignment(stmt.Lhs, stmt.Rhs[0])
+		} else {
+			v.handleMultiAssignment(stmt.Lhs, stmt.Rhs)
+		}
 	}
 
 	return true

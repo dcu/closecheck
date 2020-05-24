@@ -1,7 +1,6 @@
 package analyzer
 
 import (
-	"fmt"
 	"go/ast"
 	"go/types"
 
@@ -39,38 +38,6 @@ func findFunctionsThatReturnCloser(pass *analysis.Pass) {
 	for _, f := range pass.Files {
 		ast.Inspect(f, visitor.Do)
 	}
-}
-
-func hasCloser(pass *analysis.Pass, closerType *types.Interface, call *ast.CallExpr) []bool {
-	switch t := pass.TypesInfo.Types[call].Type.(type) {
-	case *types.Named:
-		println(t.String(), isCloserType(closerType, t))
-		return []bool{isCloserType(closerType, t)}
-	case *types.Pointer:
-		println(t.String(), isCloserType(closerType, t))
-		return []bool{isCloserType(closerType, t)}
-	case *types.Tuple:
-		s := make([]bool, t.Len())
-
-		for i := 0; i < t.Len(); i++ {
-			switch et := t.At(i).Type().(type) {
-			case *types.Named:
-				s[i] = isCloserType(closerType, et)
-			case *types.Pointer:
-				s[i] = isCloserType(closerType, et)
-			default:
-				s[i] = false
-			}
-		}
-
-		fmt.Printf("tuple: %#v\n", s)
-
-		return s
-	default:
-		println(t.String(), "was not handled")
-	}
-
-	return []bool{false}
 }
 
 func isCloserType(closerType *types.Interface, t types.Type) bool {

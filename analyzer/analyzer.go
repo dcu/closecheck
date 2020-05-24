@@ -35,7 +35,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 
 // init finds the io.Closer interface
 func init() {
-	cfg := &packages.Config{Mode: packages.NeedTypes, Tests: false}
+	cfg := &packages.Config{Mode: packages.NeedDeps | packages.NeedTypes, Tests: false}
 
 	pkgs, err := packages.Load(cfg, "io")
 	if err != nil {

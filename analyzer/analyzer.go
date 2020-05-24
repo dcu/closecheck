@@ -23,14 +23,6 @@ var (
 )
 
 func run(pass *analysis.Pass) (interface{}, error) {
-	println("running analysis...", pass.Pkg.Name())
-
-	findFunctionsThatReturnCloser(pass)
-
-	return nil, nil
-}
-
-func findFunctionsThatReturnCloser(pass *analysis.Pass) {
 	visitor := &Visitor{
 		pass: pass,
 	}
@@ -38,6 +30,8 @@ func findFunctionsThatReturnCloser(pass *analysis.Pass) {
 	for _, f := range pass.Files {
 		ast.Inspect(f, visitor.Do)
 	}
+
+	return nil, nil
 }
 
 // init finds the io.Closer interface

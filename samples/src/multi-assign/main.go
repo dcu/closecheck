@@ -13,5 +13,5 @@ func closer() *customCloser {
 }
 
 func main() {
-	_, _ = 1, closer()
+	_, _ = 1, closer() // want "multi-assign.customCloser should be closed"
 }

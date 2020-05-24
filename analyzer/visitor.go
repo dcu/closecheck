@@ -1,6 +1,7 @@
 package analyzer
 
 import (
+	"fmt"
 	"go/ast"
 	"go/types"
 
@@ -97,7 +98,7 @@ func (v *Visitor) returnsThatAreClosers(call *ast.CallExpr) []returnVar {
 	}
 }
 
-func (v *Visitor) handleAssignment(lhs []ast.Expr, rhs ast.Expr) {
+func (v *Visitor) handleAssignment(stack []ast.Node, lhs []ast.Expr, rhs ast.Expr) {
 	call, ok := rhs.(*ast.CallExpr)
 	if !ok {
 		return
@@ -106,15 +107,144 @@ func (v *Visitor) handleAssignment(lhs []ast.Expr, rhs ast.Expr) {
 	returnVars := v.returnsThatAreClosers(call)
 
 	for i := 0; i < len(lhs); i++ {
-		if id, ok := lhs[i].(*ast.Ident); ok {
-			if id.Name == "_" && returnVars[i].needsClosing {
+		id, ok := lhs[i].(*ast.Ident)
+		if !ok {
+			continue
+		}
+
+		if returnVars[i].needsClosing {
+			if id.Name == "_" {
+				v.pass.Reportf(id.Pos(), "%s should be closed", returnVars[i].name)
+			} else if !v.ensureCloseOrReturnOnID(stack, id) {
 				v.pass.Reportf(id.Pos(), "%s should be closed", returnVars[i].name)
 			}
 		}
 	}
 }
 
-func (v *Visitor) handleMultiAssignment(lhs []ast.Expr, rhs []ast.Expr) {
+func (v *Visitor) ensureCloseOrReturnOnID(stack []ast.Node, id *ast.Ident) bool {
+	stmts := v.statementsForCurrentBlock(stack)
+
+	// debug
+	for _, stmt := range stmts {
+		fmt.Println("-------- statement ---------")
+
+		_ = ast.Print(v.pass.Fset, stmt)
+	}
+
+	return v.ensureCloseOrReturnOnStatements(id, stmts)
+}
+
+func (v *Visitor) ensureCloseOrReturnOnStatements(id *ast.Ident, stmts []ast.Stmt) bool {
+	for _, stmt := range stmts {
+		switch castedStmt := stmt.(type) {
+		case *ast.ReturnStmt:
+			if v.ensureCloseOrReturnOnExpressions(id, castedStmt.Results) {
+				return true
+			}
+		case *ast.DeferStmt:
+			if v.ensureCloseOrReturnOnExpressions(id, []ast.Expr{castedStmt.Call}) {
+				return true
+			}
+		case *ast.ExprStmt:
+			if v.ensureCloseOrReturnOnExpressions(id, []ast.Expr{castedStmt.X}) {
+				return true
+			}
+		case *ast.AssignStmt:
+			if v.ensureCloseOrReturnOnExpressions(id, castedStmt.Rhs) {
+				return true
+			}
+		case *ast.BlockStmt:
+			return v.ensureCloseOrReturnOnStatements(id, castedStmt.List)
+		}
+	}
+
+	return false
+}
+
+func compareIdents(id1 *ast.Ident, id2 *ast.Ident) bool {
+	return id1.Obj == id2.Obj
+}
+
+func (v *Visitor) ensureCloseOrReturnOnExpressions(id *ast.Ident, exprs []ast.Expr) bool {
+	for _, expr := range exprs {
+		switch castedExpr := expr.(type) {
+		case *ast.Ident:
+			if compareIdents(castedExpr, id) {
+				return true
+			} else if castedExpr.Obj != nil && castedExpr.Obj.Kind == ast.Fun {
+				funcDecl, ok := castedExpr.Obj.Decl.(*ast.FuncDecl)
+				if !ok {
+					continue
+				}
+
+				if v.ensureCloseOrReturnOnStatements(id, []ast.Stmt{funcDecl.Body}) {
+					return true
+				}
+			}
+		case *ast.CallExpr:
+			if v.ensureCloseOrReturnOnExpressions(id, []ast.Expr{castedExpr.Fun}) {
+				return true
+			}
+		case *ast.SelectorExpr:
+			if v.ensureCloseOrReturnSelector(id, castedExpr) {
+				return true
+			}
+		case *ast.FuncLit:
+			if v.ensureCloseOrReturnOnStatements(id, castedExpr.Body.List) {
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
+func (v *Visitor) ensureCloseOrReturnSelector(id *ast.Ident, sel *ast.SelectorExpr) bool {
+	wasClosed := false
+
+	v.visitIdents(sel, func(visitedID *ast.Ident) {
+		if visitedID.Name == "Close" { // FIXME: this is not accurate
+			wasClosed = true
+
+			return
+		}
+	})
+
+	return wasClosed
+}
+
+func (v *Visitor) visitIdents(n ast.Node, cb func(id *ast.Ident)) {
+	switch n := n.(type) {
+	case *ast.SelectorExpr:
+		cb(n.Sel)
+
+		v.visitIdents(n.X, cb)
+	case *ast.Ident:
+		cb(n)
+	}
+}
+
+func (v *Visitor) statementsForCurrentBlock(stack []ast.Node) []ast.Stmt {
+	for i := len(stack) - 1; i >= 0; i-- {
+		block, ok := stack[i].(*ast.BlockStmt)
+		if !ok {
+			continue
+		}
+
+		for j, v := range block.List {
+			if v == stack[i+1] {
+				return block.List[j:]
+			}
+		}
+
+		break
+	}
+
+	return nil
+}
+
+func (v *Visitor) handleMultiAssignment(stack []ast.Node, lhs []ast.Expr, rhs []ast.Expr) {
 	for i := 0; i < len(rhs); i++ {
 		id, ok := lhs[i].(*ast.Ident)
 		if !ok {
@@ -139,7 +269,11 @@ func (v *Visitor) handleCall(call *ast.CallExpr) {
 }
 
 // Do performs the visits to the code nodes
-func (v *Visitor) Do(node ast.Node) bool {
+func (v *Visitor) Do(node ast.Node, push bool, stack []ast.Node) bool {
+	if !push {
+		return true
+	}
+
 	switch stmt := node.(type) {
 	case *ast.ExprStmt:
 		if call, ok := stmt.X.(*ast.CallExpr); ok {
@@ -147,9 +281,9 @@ func (v *Visitor) Do(node ast.Node) bool {
 		}
 	case *ast.AssignStmt:
 		if len(stmt.Rhs) == 1 {
-			v.handleAssignment(stmt.Lhs, stmt.Rhs[0])
+			v.handleAssignment(stack, stmt.Lhs, stmt.Rhs[0])
 		} else {
-			v.handleMultiAssignment(stmt.Lhs, stmt.Rhs)
+			v.handleMultiAssignment(stack, stmt.Lhs, stmt.Rhs)
 		}
 	case *ast.GoStmt:
 		v.handleCall(stmt.Call)

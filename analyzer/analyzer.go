@@ -6,6 +6,7 @@ import (
 
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/analysis/passes/inspect"
+	"golang.org/x/tools/go/ast/inspector"
 	"golang.org/x/tools/go/packages"
 )
 
@@ -26,9 +27,9 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		pass: pass,
 	}
 
-	for _, f := range pass.Files {
-		ast.Inspect(f, visitor.Do)
-	}
+	stack := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
+
+	stack.WithStack([]ast.Node{&ast.ExprStmt{}, &ast.AssignStmt{}, &ast.GoStmt{}, &ast.DeferStmt{}}, visitor.Do)
 
 	return nil, nil
 }

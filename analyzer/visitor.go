@@ -71,6 +71,15 @@ func (v *Visitor) handleAssignment(lhs []ast.Expr, rhs ast.Expr) {
 }
 
 func (v *Visitor) handleMultiAssignment(lhs []ast.Expr, rhs []ast.Expr) {
+	for i := 0; i < len(rhs); i++ {
+		if id, ok := lhs[i].(*ast.Ident); ok {
+			if call, ok := rhs[i].(*ast.CallExpr); ok {
+				if id.Name == "_" && v.callReturnsCloser(call) {
+					fmt.Println("this should be marked as error because the closer is asigned to _ in multi assign expression")
+				}
+			}
+		}
+	}
 }
 
 // Do performs the visits to the code nodes

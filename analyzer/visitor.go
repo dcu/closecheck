@@ -97,6 +97,14 @@ func (v *Visitor) Do(node ast.Node) bool {
 		} else {
 			v.handleMultiAssignment(stmt.Lhs, stmt.Rhs)
 		}
+	case *ast.GoStmt:
+		if v.callReturnsCloser(stmt.Call) {
+			fmt.Println("this should fail because it's part of a go statement")
+		}
+	case *ast.DeferStmt:
+		if v.callReturnsCloser(stmt.Call) {
+			fmt.Println("this should fail because it's part of a defer statement")
+		}
 	}
 
 	return true

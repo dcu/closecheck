@@ -1,7 +1,6 @@
 package analyzer
 
 import (
-	"fmt"
 	"go/ast"
 	"go/types"
 
@@ -13,9 +12,40 @@ type Visitor struct {
 	pass *analysis.Pass
 }
 
-func (v *Visitor) callReturnsCloser(call *ast.CallExpr) bool {
-	for _, isCloser := range v.returnsThatAreClosers(call) {
-		if isCloser {
+type returnVar struct {
+	name         string
+	needsClosing bool
+}
+
+func (v *Visitor) callReturnsCloser(call *ast.CallExpr) (bool, string) {
+	for _, returnVar := range v.returnsThatAreClosers(call) {
+		if returnVar.needsClosing {
+			return true, returnVar.name
+		}
+	}
+
+	return false, ""
+}
+
+func (v *Visitor) isCloserType(closerType *types.Interface, t types.Type) bool {
+	if types.Implements(t, closerType) {
+		return true
+	}
+
+	// special case: a struct containing a Body field that implements io.Closer, like http.Response
+	ptr, ok := t.Underlying().(*types.Pointer)
+	if !ok {
+		return false
+	}
+
+	str, ok := ptr.Elem().Underlying().(*types.Struct)
+	if !ok {
+		return false
+	}
+
+	for i := 0; i < str.NumFields(); i++ {
+		v := str.Field(i)
+		if v.Name() == "Body" && types.Implements(v.Type(), closerType) {
 			return true
 		}
 	}
@@ -23,47 +53,59 @@ func (v *Visitor) callReturnsCloser(call *ast.CallExpr) bool {
 	return false
 }
 
-func (v *Visitor) returnsThatAreClosers(call *ast.CallExpr) []bool {
+func (v *Visitor) returnsThatAreClosers(call *ast.CallExpr) []returnVar {
 	switch t := v.pass.TypesInfo.Types[call].Type.(type) {
 	case *types.Named:
-		println(t.String(), isCloserType(closerType, t))
-		return []bool{isCloserType(closerType, t)}
+		return []returnVar{
+			{
+				name:         t.String(),
+				needsClosing: v.isCloserType(closerType, t),
+			},
+		}
 	case *types.Pointer:
-		println(t.String(), isCloserType(closerType, t))
-		return []bool{isCloserType(closerType, t)}
+		return []returnVar{
+			{
+				name:         t.String(),
+				needsClosing: v.isCloserType(closerType, t),
+			},
+		}
 	case *types.Tuple:
-		s := make([]bool, t.Len())
+		s := make([]returnVar, t.Len())
 
 		for i := 0; i < t.Len(); i++ {
 			switch et := t.At(i).Type().(type) {
 			case *types.Named:
-				s[i] = isCloserType(closerType, et)
+				s[i].name = et.String()
+				s[i].needsClosing = v.isCloserType(closerType, et)
 			case *types.Pointer:
-				s[i] = isCloserType(closerType, et)
+				s[i].name = et.String()
+				s[i].needsClosing = v.isCloserType(closerType, et)
 			default:
-				s[i] = false
+				s[i].name = et.String()
+				s[i].needsClosing = false
 			}
 		}
 
-		fmt.Printf("tuple: %#v\n", s)
-
 		return s
-	default:
-		println(t.String(), "was not handled")
 	}
 
-	return []bool{false}
+	return []returnVar{
+		{
+			name:         "",
+			needsClosing: false,
+		},
+	}
 }
 
 func (v *Visitor) handleAssignment(lhs []ast.Expr, rhs ast.Expr) {
 	switch n := rhs.(type) {
 	case *ast.CallExpr:
-		isCloserAtPos := v.returnsThatAreClosers(n)
+		returnVars := v.returnsThatAreClosers(n)
 
 		for i := 0; i < len(lhs); i++ {
 			if id, ok := lhs[i].(*ast.Ident); ok {
-				if id.Name == "_" && isCloserAtPos[i] {
-					fmt.Println("this should be marked as error because the closer is asigned to _")
+				if id.Name == "_" && returnVars[i].needsClosing {
+					v.pass.Reportf(id.Pos(), "%s should be closed", returnVars[i].name)
 				}
 			}
 		}
@@ -74,8 +116,9 @@ func (v *Visitor) handleMultiAssignment(lhs []ast.Expr, rhs []ast.Expr) {
 	for i := 0; i < len(rhs); i++ {
 		if id, ok := lhs[i].(*ast.Ident); ok {
 			if call, ok := rhs[i].(*ast.CallExpr); ok {
-				if id.Name == "_" && v.callReturnsCloser(call) {
-					fmt.Println("this should be marked as error because the closer is asigned to _ in multi assign expression")
+				needsClosing, retName := v.callReturnsCloser(call)
+				if id.Name == "_" && needsClosing {
+					v.pass.Reportf(call.Pos(), "%s should be closed", retName)
 				}
 			}
 		}
@@ -87,8 +130,8 @@ func (v *Visitor) Do(node ast.Node) bool {
 	switch stmt := node.(type) {
 	case *ast.ExprStmt:
 		if call, ok := stmt.X.(*ast.CallExpr); ok {
-			if v.callReturnsCloser(call) {
-				fmt.Println("this should fail because it's a statement with not handled closer")
+			if ok, name := v.callReturnsCloser(call); ok {
+				v.pass.Reportf(call.Pos(), "%s should be closed", name)
 			}
 		}
 	case *ast.AssignStmt:
@@ -98,12 +141,12 @@ func (v *Visitor) Do(node ast.Node) bool {
 			v.handleMultiAssignment(stmt.Lhs, stmt.Rhs)
 		}
 	case *ast.GoStmt:
-		if v.callReturnsCloser(stmt.Call) {
-			fmt.Println("this should fail because it's part of a go statement")
+		if ok, name := v.callReturnsCloser(stmt.Call); ok {
+			v.pass.Reportf(stmt.Call.Pos(), "%s should be closed", name)
 		}
 	case *ast.DeferStmt:
-		if v.callReturnsCloser(stmt.Call) {
-			fmt.Println("this should fail because it's part of a defer statement")
+		if ok, name := v.callReturnsCloser(stmt.Call); ok {
+			v.pass.Reportf(stmt.Call.Pos(), "%s should be closed", name)
 		}
 	}
 

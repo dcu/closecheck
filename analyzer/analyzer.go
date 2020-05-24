@@ -40,32 +40,6 @@ func findFunctionsThatReturnCloser(pass *analysis.Pass) {
 	}
 }
 
-func isCloserType(closerType *types.Interface, t types.Type) bool {
-	println(t.String(), "implements", closerType.String(), "?", types.Implements(t, closerType))
-
-	ptr, ok := t.Underlying().(*types.Pointer)
-	if ok {
-		println("is a pointer!", ptr.String())
-
-		str := ptr.Elem().Underlying().(*types.Struct)
-
-		if ok {
-			println("is a struct!", str.String())
-
-			for i := 0; i < str.NumFields(); i++ {
-				v := str.Field(i)
-				if v.Name() == "Body" && types.Implements(v.Type(), closerType) {
-					println("body found!")
-
-					return true
-				}
-			}
-		}
-	}
-
-	return types.Implements(t, closerType)
-}
-
 // init finds the io.Closer interface
 func init() {
 	cfg := &packages.Config{Mode: packages.NeedTypes, Tests: false}

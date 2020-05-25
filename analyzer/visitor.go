@@ -3,6 +3,7 @@ package analyzer
 import (
 	"fmt"
 	"go/ast"
+	"go/token"
 	"go/types"
 
 	"golang.org/x/tools/go/analysis"
@@ -11,6 +12,8 @@ import (
 // Visitor visits the code nodes looking for variables that need to be closed
 type Visitor struct {
 	pass *analysis.Pass
+
+	globalVars map[token.Pos]bool
 }
 
 type returnVar struct {
@@ -68,8 +71,14 @@ func (v *Visitor) newReturnVar(t types.Type) returnVar {
 		needsClosing: false,
 	}
 }
-
 func (v *Visitor) returnsThatAreClosers(call *ast.CallExpr) []returnVar {
+	if fn, ok := call.Fun.(*ast.SelectorExpr); ok && fn.Sel.Name == "NopCloser" {
+		o, ok := fn.X.(*ast.Ident)
+		if ok && o.Name == "ioutil" {
+			return []returnVar{{}}
+		}
+	}
+
 	switch t := v.pass.TypesInfo.Types[call].Type.(type) {
 	case *types.Named:
 		return []returnVar{v.newReturnVar(t)}
@@ -98,6 +107,19 @@ func (v *Visitor) returnsThatAreClosers(call *ast.CallExpr) []returnVar {
 	}
 }
 
+func (v *Visitor) identIsCloser(ident *ast.Ident) bool {
+	switch t := v.pass.TypesInfo.Types[ident].Type.(type) {
+	case *types.Named:
+		return types.Implements(t, closerType)
+	case *types.Pointer:
+		return types.Implements(t, closerType)
+	default:
+		println("cannot determine if ident is a closer", ident.Name, t)
+	}
+
+	return false
+}
+
 func (v *Visitor) handleAssignment(stack []ast.Node, lhs []ast.Expr, rhs ast.Expr) {
 	call, ok := rhs.(*ast.CallExpr)
 	if !ok {
@@ -112,6 +134,10 @@ func (v *Visitor) handleAssignment(stack []ast.Node, lhs []ast.Expr, rhs ast.Exp
 			continue
 		}
 
+		if v.shouldIgnoreGlobalVariable(id) {
+			continue
+		}
+
 		if returnVars[i].needsClosing {
 			if id.Name == "_" {
 				v.pass.Reportf(id.Pos(), "%s should be closed", returnVars[i].name)
@@ -122,16 +148,25 @@ func (v *Visitor) handleAssignment(stack []ast.Node, lhs []ast.Expr, rhs ast.Exp
 	}
 }
 
+func (v *Visitor) shouldIgnoreGlobalVariable(id *ast.Ident) bool {
+	if id.Obj == nil || id.Obj.Decl == nil {
+		return false
+	}
+
+	val, ok := id.Obj.Decl.(*ast.ValueSpec)
+	if !ok {
+		return false
+	}
+
+	if len(val.Names) == 1 && v.globalVars[val.Names[0].NamePos] {
+		return true
+	}
+
+	return false
+}
+
 func (v *Visitor) ensureCloseOrReturnOnID(stack []ast.Node, id *ast.Ident) bool {
 	stmts := v.statementsForCurrentBlock(stack)
-
-	if debugMode {
-		for i, stmt := range stmts {
-			fmt.Printf("-------- statement %d ---------\n", i)
-
-			_ = ast.Print(v.pass.Fset, stmt)
-		}
-	}
 
 	return v.ensureCloseOrReturnOnStatements(id, stmts)
 }
@@ -289,8 +324,18 @@ func (v *Visitor) handleCall(call *ast.CallExpr) {
 
 // Do performs the visits to the code nodes
 func (v *Visitor) Do(node ast.Node, push bool, stack []ast.Node) bool {
+	if printStatementsMode {
+		fmt.Println("------ statement --------", push)
+
+		_ = ast.Print(v.pass.Fset, node)
+	}
+
 	if !push {
 		return true
+	}
+
+	if id, ok := node.(*ast.Ident); ok && id.Obj != nil && id.Obj.Decl != nil && id.Obj.Kind == ast.Var {
+		v.globalVars[id.NamePos] = true
 	}
 
 	switch stmt := node.(type) {

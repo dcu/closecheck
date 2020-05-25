@@ -10,5 +10,5 @@ import (
 func Test(t *testing.T) {
 	path, _ := filepath.Abs("../samples")
 
-	analysistest.Run(t, path, Analyzer, "http-response-ignored", "http-response-not-assigned", "multi-assign", "http-response-on-go-statement", "http-response-on-defer-statement", "http-response-assigned")
+	analysistest.Run(t, path, Analyzer, "http-response-ignored", "http-response-not-assigned", "multi-assign", "http-response-on-go-statement", "http-response-on-defer-statement", "http-response-assigned", "global-var", "http-response-nopcloser")
 }

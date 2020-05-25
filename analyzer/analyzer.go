@@ -2,6 +2,7 @@ package analyzer
 
 import (
 	"go/ast"
+	"go/token"
 	"go/types"
 
 	"golang.org/x/tools/go/analysis"
@@ -19,24 +20,25 @@ var (
 		Requires: []*analysis.Analyzer{inspect.Analyzer},
 	}
 
-	closerType *types.Interface
-	debugMode  bool
+	closerType          *types.Interface
+	printStatementsMode bool
 )
 
 func run(pass *analysis.Pass) (interface{}, error) {
 	visitor := &Visitor{
-		pass: pass,
+		pass:       pass,
+		globalVars: map[token.Pos]bool{},
 	}
 
 	stack := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
 
-	stack.WithStack([]ast.Node{&ast.ExprStmt{}, &ast.AssignStmt{}, &ast.GoStmt{}, &ast.DeferStmt{}}, visitor.Do)
+	stack.WithStack([]ast.Node{&ast.ExprStmt{}, &ast.AssignStmt{}, &ast.GoStmt{}, &ast.DeferStmt{}, &ast.Ident{}, &ast.CallExpr{}, &ast.DeclStmt{}}, visitor.Do)
 
 	return nil, nil
 }
 
 func init() {
-	Analyzer.Flags.BoolVar(&debugMode, "debug", false, "enable debug mode")
+	Analyzer.Flags.BoolVar(&printStatementsMode, "print-statements", false, "print program trace")
 }
 
 // init finds the io.Closer interface

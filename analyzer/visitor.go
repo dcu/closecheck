@@ -125,11 +125,12 @@ func (v *Visitor) handleAssignment(stack []ast.Node, lhs []ast.Expr, rhs ast.Exp
 func (v *Visitor) ensureCloseOrReturnOnID(stack []ast.Node, id *ast.Ident) bool {
 	stmts := v.statementsForCurrentBlock(stack)
 
-	// debug
-	for _, stmt := range stmts {
-		fmt.Println("-------- statement ---------")
+	if debugMode {
+		for i, stmt := range stmts {
+			fmt.Printf("-------- statement %d ---------\n", i)
 
-		_ = ast.Print(v.pass.Fset, stmt)
+			_ = ast.Print(v.pass.Fset, stmt)
+		}
 	}
 
 	return v.ensureCloseOrReturnOnStatements(id, stmts)
@@ -183,6 +184,24 @@ func (v *Visitor) ensureCloseOrReturnOnExpressions(id *ast.Ident, exprs []ast.Ex
 				}
 			}
 		case *ast.CallExpr:
+			for _, arg := range castedExpr.Args {
+				wasIdentFound := false
+
+				// the closable was passed to a different function
+				// TODO: check that the function closes the received object.
+				// TODO: check that the passed object is actually a io.Closer
+
+				v.visitIdents(arg, func(idSel *ast.Ident) {
+					if compareIdents(idSel, id) {
+						wasIdentFound = true
+					}
+				})
+
+				if wasIdentFound {
+					return true
+				}
+			}
+
 			if v.ensureCloseOrReturnOnExpressions(id, []ast.Expr{castedExpr.Fun}) {
 				return true
 			}

@@ -20,6 +20,7 @@ var (
 	}
 
 	closerType *types.Interface
+	debugMode  bool
 )
 
 func run(pass *analysis.Pass) (interface{}, error) {
@@ -32,6 +33,10 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	stack.WithStack([]ast.Node{&ast.ExprStmt{}, &ast.AssignStmt{}, &ast.GoStmt{}, &ast.DeferStmt{}}, visitor.Do)
 
 	return nil, nil
+}
+
+func init() {
+	Analyzer.Flags.BoolVar(&debugMode, "debug", false, "enable debug mode")
 }
 
 // init finds the io.Closer interface

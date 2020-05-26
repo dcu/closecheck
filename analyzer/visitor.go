@@ -5,6 +5,7 @@ import (
 	"go/ast"
 	"go/token"
 	"go/types"
+	"unicode"
 
 	"golang.org/x/tools/go/analysis"
 )
@@ -58,9 +59,12 @@ func (v *Visitor) newReturnVar(t types.Type) returnVar {
 
 	for i := 0; i < str.NumFields(); i++ {
 		v := str.Field(i)
-		if types.Implements(v.Type(), closerType) {
+		fieldName := v.Name()
+
+		// TODO: don't ignore unexported fields if the struct is in the current package
+		if types.Implements(v.Type(), closerType) && unicode.IsUpper([]rune(fieldName)[0]) {
 			return returnVar{
-				name:         t.String() + "." + v.Name(),
+				name:         t.String() + "." + fieldName,
 				needsClosing: true,
 			}
 		}
@@ -324,14 +328,14 @@ func (v *Visitor) handleCall(call *ast.CallExpr) {
 
 // Do performs the visits to the code nodes
 func (v *Visitor) Do(node ast.Node, push bool, stack []ast.Node) bool {
-	if printStatementsMode {
-		fmt.Println("------ statement --------", push)
-
-		_ = ast.Print(v.pass.Fset, node)
-	}
-
 	if !push {
 		return true
+	}
+
+	if printStatementsMode {
+		fmt.Println("------ statement --------")
+
+		_ = ast.Print(v.pass.Fset, node)
 	}
 
 	if id, ok := node.(*ast.Ident); ok && id.Obj != nil && id.Obj.Decl != nil && id.Obj.Kind == ast.Var {

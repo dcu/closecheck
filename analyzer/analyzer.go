@@ -1,23 +1,21 @@
 package analyzer
 
 import (
-	"go/ast"
-	"go/token"
 	"go/types"
 
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/analysis/passes/inspect"
-	"golang.org/x/tools/go/ast/inspector"
 	"golang.org/x/tools/go/packages"
 )
 
 var (
 	// Analyzer defines the analyzer for closecheck
 	Analyzer = &analysis.Analyzer{
-		Name:     "closecheck",
-		Doc:      "check that any io.Closer in return a value is closed",
-		Run:      run,
-		Requires: []*analysis.Analyzer{inspect.Analyzer},
+		Name:      "closecheck",
+		Doc:       "check that any io.Closer in return a value is closed",
+		Run:       run,
+		Requires:  []*analysis.Analyzer{inspect.Analyzer},
+		FactTypes: []analysis.Fact{new(isCloser)},
 	}
 
 	closerType          *types.Interface
@@ -25,14 +23,17 @@ var (
 )
 
 func run(pass *analysis.Pass) (interface{}, error) {
-	visitor := &Visitor{
-		pass:       pass,
-		globalVars: map[token.Pos]bool{},
-	}
+	fVisitor := &FunctionVisitor{pass: pass}
+	fVisitor.findFunctionsThatReceiveAnIOCloser()
 
-	stack := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
+	//visitor := &Visitor{
+	//pass:       pass,
+	//globalVars: map[token.Pos]bool{},
+	//}
 
-	stack.WithStack([]ast.Node{&ast.ExprStmt{}, &ast.AssignStmt{}, &ast.GoStmt{}, &ast.DeferStmt{}, &ast.Ident{}, &ast.CallExpr{}, &ast.DeclStmt{}}, visitor.Do)
+	//stack := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
+
+	//stack.WithStack([]ast.Node{&ast.ExprStmt{}, &ast.AssignStmt{}, &ast.GoStmt{}, &ast.DeferStmt{}, &ast.Ident{}, &ast.CallExpr{}, &ast.DeclStmt{}, &ast.ReturnStmt{}}, visitor.Do)
 
 	return nil, nil
 }

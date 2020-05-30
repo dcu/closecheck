@@ -118,7 +118,6 @@ func (v *Visitor) identIsCloser(ident *ast.Ident) bool {
 	case *types.Pointer:
 		return types.Implements(t, closerType)
 	default:
-		println("cannot determine if ident is a closer", ident.Name, t)
 	}
 
 	return false
@@ -195,6 +194,10 @@ func (v *Visitor) ensureCloseOrReturnOnStatements(id *ast.Ident, stmts []ast.Stm
 				return true
 			}
 		case *ast.BlockStmt:
+			if castedStmt == nil {
+				continue
+			}
+
 			return v.ensureCloseOrReturnOnStatements(id, castedStmt.List)
 		}
 	}
@@ -260,14 +263,23 @@ func (v *Visitor) ensureCloseOrReturnOnExpressions(id *ast.Ident, exprs []ast.Ex
 
 func (v *Visitor) ensureCloseOrReturnSelector(id *ast.Ident, sel *ast.SelectorExpr) bool {
 	wasClosed := false
+	var lastIdent *ast.Ident
 
 	v.visitIdents(sel, func(visitedID *ast.Ident) {
+		if lastIdent == nil {
+			lastIdent = visitedID
+		}
+
 		if visitedID.Name == "Close" { // FIXME: this is not accurate
 			wasClosed = true
 
 			return
 		}
 	})
+
+	if lastIdent != nil && v.identIsCloser(lastIdent) {
+		return true
+	}
 
 	return wasClosed
 }

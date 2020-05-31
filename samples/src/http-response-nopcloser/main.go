@@ -12,7 +12,7 @@ func main() {
 		panic(err)
 	}
 
-	//defer res.Body.Close()
+	defer res.Body.Close()
 
 	nopCloser := ioutil.NopCloser(res.Body)
 

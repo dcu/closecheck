@@ -15,25 +15,24 @@ var (
 		Doc:       "check that any io.Closer in return a value is closed",
 		Run:       run,
 		Requires:  []*analysis.Analyzer{inspect.Analyzer},
-		FactTypes: []analysis.Fact{new(isCloser)},
+		FactTypes: []analysis.Fact{new(ioCloserFunc)},
 	}
 
 	closerType          *types.Interface
 	printStatementsMode bool
 )
 
+type isCloser struct {
+}
+
+func (c *isCloser) AFact() {}
+
 func run(pass *analysis.Pass) (interface{}, error) {
 	fVisitor := &FunctionVisitor{pass: pass}
-	fVisitor.findFunctionsThatReceiveAnIOCloser()
+	funcs := fVisitor.findFunctionsThatReceiveAnIOCloser()
 
-	//visitor := &Visitor{
-	//pass:       pass,
-	//globalVars: map[token.Pos]bool{},
-	//}
-
-	//stack := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
-
-	//stack.WithStack([]ast.Node{&ast.ExprStmt{}, &ast.AssignStmt{}, &ast.GoStmt{}, &ast.DeferStmt{}, &ast.Ident{}, &ast.CallExpr{}, &ast.DeclStmt{}, &ast.ReturnStmt{}}, visitor.Do)
+	aVisitor := &AssignVisitor{pass: pass, closerFuncs: funcs, localGlobalVars: fVisitor.localGlobalVars}
+	aVisitor.checkFunctionsThatAssignCloser()
 
 	return nil, nil
 }

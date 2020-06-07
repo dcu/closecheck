@@ -34,6 +34,9 @@ func (c closer) closeBodyWithContext(ctx context.Context, bodyToBeClosed io.Clos
 	}
 }
 
+func (c closer) doNothing(interface{}) {
+}
+
 var aCloser = closer{}
 
 func main() {
@@ -58,4 +61,7 @@ func main() {
 	defer aCloser.closeBody2(res5.Body)
 
 	doReq() // want `return value won't be closed because it wasn't assigned`
+
+	res6 := doReq()
+	aCloser.doNothing(res6.Body.Close())
 }

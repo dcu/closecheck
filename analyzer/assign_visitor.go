@@ -200,6 +200,21 @@ func (av *AssignVisitor) hasGlobalCloserInAssignment(lhs []ast.Expr) bool {
 	return false
 }
 
+func (av *AssignVisitor) returnsOrClosesIDOnExpression(idToClose posToClose, expr ast.Expr) bool {
+	switch cExpr := expr.(type) {
+	case *ast.Ident:
+		return av.getKnownCloserFromIdent(cExpr) != nil
+	case *ast.FuncLit:
+		return av.traverse(cExpr.Body.List)
+	case *ast.CallExpr:
+		return av.callsToKnownCloser(idToClose.pos, cExpr)
+	case *ast.SelectorExpr:
+		return av.getKnownCloserFromSelector(cExpr) != nil
+	}
+
+	return false
+}
+
 func (av *AssignVisitor) returnsOrClosesID(idToClose posToClose, stmt ast.Stmt) bool {
 	switch castedStmt := stmt.(type) {
 	case *ast.ReturnStmt:
@@ -230,6 +245,12 @@ func (av *AssignVisitor) returnsOrClosesID(idToClose posToClose, stmt ast.Stmt) 
 		if av.callReturnsCloser(call) {
 			av.pass.Reportf(call.Pos(), "return value won't be closed because it wasn't assigned") // FIXME: improve message
 			return false
+		}
+
+		for _, arg := range call.Args {
+			if av.returnsOrClosesIDOnExpression(idToClose, arg) {
+				return true
+			}
 		}
 
 		if av.callsToKnownCloser(idToClose.pos, call) {
@@ -459,6 +480,8 @@ func (av *AssignVisitor) callsToKnownCloser(pos token.Pos, call *ast.CallExpr) b
 	}
 
 	switch castedFun := call.Fun.(type) {
+	case *ast.CallExpr:
+		return av.callsToKnownCloser(pos, castedFun)
 	case *ast.Ident:
 		return av.getKnownCloserFromIdent(castedFun) != nil
 	case *ast.SelectorExpr:

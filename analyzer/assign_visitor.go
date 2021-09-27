@@ -5,6 +5,8 @@ import (
 	"go/ast"
 	"go/token"
 	"go/types"
+	"log"
+	"strings"
 	"unicode"
 
 	"golang.org/x/tools/go/analysis"
@@ -25,6 +27,19 @@ type AssignVisitor struct {
 
 func (av *AssignVisitor) debug(n ast.Node, text string, args ...interface{}) {
 	if !enableAssignDebugger {
+		return
+	}
+
+	if n == nil {
+		return
+	}
+
+	pos := av.pass.Fset.Position(
+		n.Pos(),
+	)
+
+	if strings.Contains(pos.Filename, "/libexec/") {
+		log.Printf("Ignored debug: %v", pos.Filename)
 		return
 	}
 
@@ -53,7 +68,7 @@ type returnVar struct {
 	fields       []field
 }
 
-func newReturnVar(t types.Type) returnVar {
+func (av *AssignVisitor) newReturnVar(t types.Type) returnVar {
 	if types.Implements(t, closerType) {
 		return returnVar{
 			needsClosing: true,
@@ -110,14 +125,6 @@ func (av *AssignVisitor) checkFunctionsThatAssignCloser() {
 			if !ok || fdecl.Body == nil {
 				continue
 			}
-
-			//if fdecl.Name.Name != "doReq" {
-			//continue
-			//}
-
-			//fmt.Println(">%%%%%%%")
-			//av.debug(fdecl)
-			//fmt.Println("<%%%%%%%")
 
 			if !av.traverse(fdecl.Body.List) && printFunctionFailure {
 				fmt.Println("Printing function that failed")
@@ -379,25 +386,25 @@ func (av *AssignVisitor) callReturnsCloser(call *ast.CallExpr) bool {
 func (av *AssignVisitor) returnsThatAreClosers(call *ast.CallExpr) []returnVar {
 	if fn, ok := call.Fun.(*ast.SelectorExpr); ok && fn.Sel.Name == "NopCloser" {
 		o, ok := fn.X.(*ast.Ident)
-		if ok && o.Name == "ioutil" {
+		if ok && (o.Name == "ioutil" || o.Name == "io") {
 			return []returnVar{{}}
 		}
 	}
 
 	switch t := av.pass.TypesInfo.Types[call].Type.(type) {
 	case *types.Named:
-		return []returnVar{newReturnVar(t)}
+		return []returnVar{av.newReturnVar(t)}
 	case *types.Pointer:
-		return []returnVar{newReturnVar(t)}
+		return []returnVar{av.newReturnVar(t)}
 	case *types.Tuple:
 		s := make([]returnVar, t.Len())
 
 		for i := 0; i < t.Len(); i++ {
 			switch et := t.At(i).Type().(type) {
 			case *types.Named:
-				s[i] = newReturnVar(et)
+				s[i] = av.newReturnVar(et)
 			case *types.Pointer:
-				s[i] = newReturnVar(et)
+				s[i] = av.newReturnVar(et)
 			}
 		}
 
@@ -497,9 +504,10 @@ func (av *AssignVisitor) callsToKnownCloser(pos token.Pos, call *ast.CallExpr) b
 
 func (av *AssignVisitor) isPosInExpression(pos token.Pos, expr ast.Expr) bool {
 	switch castedExpr := expr.(type) {
+	case *ast.UnaryExpr:
+		return av.isPosInExpression(pos, castedExpr.X)
 	case *ast.CallExpr:
 		return av.findKnownReceiverFromCall(pos, castedExpr) != nil
-
 	case *ast.Ident:
 		return av.isIdentInPos(castedExpr, pos)
 	case *ast.SelectorExpr:
@@ -515,6 +523,21 @@ func (av *AssignVisitor) isPosInExpression(pos token.Pos, expr ast.Expr) bool {
 		})
 
 		return wasFound
+	case *ast.CompositeLit:
+		if castedExpr.Elts == nil {
+			break
+		}
+
+		for _, e := range castedExpr.Elts {
+			if av.isPosInExpression(pos, e) {
+				return true
+			}
+		}
+	case *ast.KeyValueExpr:
+		// FIXME: this is not 100% accurate because we haven't checked that the Close is called in the future
+		if av.isPosInExpression(pos, castedExpr.Value) {
+			return true
+		}
 	}
 
 	return false

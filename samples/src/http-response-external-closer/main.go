@@ -2,7 +2,8 @@ package main
 
 import (
 	"net/http"
-	"testhelper"
+
+	"github.com/dcu/closecheck/samples/src/testhelper"
 )
 
 func doReq() *http.Response {

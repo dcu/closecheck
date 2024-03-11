@@ -7,7 +7,7 @@
 You can get `closecheck` by `go get` command.
 
 ```bash
-$ go get -u github.com/dcu/closecheck
+$ go get -u github.com/nikoremi97/closecheck
 ```
 
 ## QuickStart

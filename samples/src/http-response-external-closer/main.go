@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/dcu/closecheck/samples/src/testhelper"
+	"github.com/nikoremi97/closecheck/samples/src/testhelper"
 )
 
 func doReq() *http.Response {

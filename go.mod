@@ -1,8 +1,7 @@
 module github.com/dcu/closecheck
 
-go 1.14
+go 1.22
 
-require (
-	golang.org/x/sys v0.0.0-20220330033206-e17cdc41300f // indirect
-	golang.org/x/tools v0.1.10
-)
+require golang.org/x/tools v0.19.0
+
+require golang.org/x/mod v0.16.0 // indirect
